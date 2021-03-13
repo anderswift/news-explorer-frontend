@@ -126,11 +126,6 @@
   .menu::after,
   .menu_open::after { display: none; }
 
-  .menu:hover, .menu:focus-within {
-    background: rgba(0, 0, 0, 0.25);
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
-  }
-
   .menu_saved-news { border-bottom: 1px solid #d1d2d6; }
 
   .menu_saved-news:hover, .menu_saved-news:focus-within {
@@ -179,7 +174,7 @@
 }
 
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1024px) {
 
   .menu { height: 80px; }
 

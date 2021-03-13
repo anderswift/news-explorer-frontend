@@ -1,6 +1,5 @@
 .header {
-  background: url(../../images/background.png);
+  background: url(../../images/background.png) 50% 50% no-repeat;
   background-size: cover;
-  min-height: 50vh;
   color: #fff;
 }
