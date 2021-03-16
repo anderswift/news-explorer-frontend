@@ -1,5 +1,5 @@
 import Header from '../Header/Header.js';
-
+import AboutAuthor from '../AboutAuthor/AboutAuthor.js';
 
 import './Main.css';
 
@@ -12,9 +12,7 @@ function Main() {
         results
       </section>
 
-      <section className="author">
-        author bio
-      </section>
+      <AboutAuthor />
     </>
   );
 }
