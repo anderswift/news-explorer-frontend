@@ -1,0 +1,7 @@
+.search-results {
+  background: #f5f6f7;
+  padding: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
