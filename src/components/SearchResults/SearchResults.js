@@ -6,7 +6,7 @@ import './SearchResults.css';
 
 function SearchResults() {
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <section className="search-results">

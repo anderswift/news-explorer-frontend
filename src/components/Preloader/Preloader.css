@@ -1,30 +1,47 @@
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 .loader {
-  padding: 98px 0 0 0;
-  min-width: 74px;
+  padding: 74px 0 0 0;
+  min-width: 50px;
   position: relative;
   color: #b6bcbf;
   font-size: 18px;
   line-height: 24px;
   margin: 0;
+  text-align: center;
 }
 
 .loader:before {
   content: '';  
   display: block;
   box-sizing: border-box;
-	width: 74px;
-	height: 74px;
+	width: 50px;
+	height: 50px;
 	border: 4px solid #d1d6d8;
 	border-bottom-color: #1a1b22;
 	border-radius: 50%;
 	position: absolute;
 	top: 0;
-	left: calc(50% - 37px);
+	left: calc(50% - 25px);
 	right: 0;
 	bottom: 0;
-  animation: spin 1.5s infinite linear;
+  animation: spin 1.25s infinite linear;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+
+@media only screen and (min-width: 768px) {
+  
+  .loader {
+    padding: 98px 0 0 0;
+    min-width: 74px;
+  }
+
+  .loader:before {
+    width: 74px;
+    height: 74px;
+    left: calc(50% - 37px);
+  }
+
 }
