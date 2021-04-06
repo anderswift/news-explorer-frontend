@@ -33,12 +33,12 @@
 .footer__menu-link {
   color: #1a1b22;
   font-weight: 400;
-  text-decoration: none;
 }
 
 .footer__icon {
   width: 20px;
   height: 20px;
+  fill: currentColor;
 }
 
 
@@ -72,9 +72,7 @@
   .footer {
     height: 80px;
     padding: 0 104px;
-  }
-  
-  
+  } 
   
   .footer__menu-item { margin: 0 22px; }
 

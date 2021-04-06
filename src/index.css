@@ -10,9 +10,3 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #1A1B22;
 }
-
-.list-reset {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}

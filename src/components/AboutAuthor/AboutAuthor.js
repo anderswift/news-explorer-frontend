@@ -5,7 +5,7 @@ function AboutAuthor() {
   return (
     <article className="about-author">
       <img src={authorPhoto} alt="Ander Swift" className="about-author__img" width="464" height="464" />
-      <div class="about-author__content">
+      <div className="about-author__content">
         <h4 className="about-author__heading">About the author</h4>
         <p className="about-author__p">Ander Swift is a developer and designer currently diving into React and Node, adapting to a MERN stack after many years of 
           working within a LAMP environment.</p>
