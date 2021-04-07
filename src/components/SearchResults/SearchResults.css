@@ -2,8 +2,27 @@
   background: #f5f6f7;
   padding: 32px 16px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.search-results__list {
+  width: 100%; 
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 1fr;
+  gap: 10px;
+}
+
+@media only screen and (min-width: 480px) {
+
+  .search-results__list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
 }
 
 
@@ -11,11 +30,18 @@
   
   .search-results { padding: 40px; }
 
+  .search-results__list { 
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px; 
+  }
+
 }
 
 
 @media only screen and (min-width: 1024px) {
   
   .search-results { padding: 80px; }
+
+  .search-results__list { gap: 16px; }
 
 }

@@ -1,0 +1,72 @@
+.card__button {
+  background: #fff;
+  color: #000;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card__button:hover, 
+.card__button:focus { background: #fff; }
+
+.card__button-icon {
+  width: 24px;
+  height: 24px;
+  fill: #fff;
+  color: #b6bcbf;
+  transition: 
+    color .35s ease-in-out,
+    fill .35s ease-in-out; 
+}
+
+
+.card__button:hover .card__button-icon,
+.card__button:focus .card__button-icon {
+  color: #000;
+}
+
+
+.card__button-icon_saved {
+  color: #2f71e5;
+  fill: #2f71e5;
+}
+
+.card__button:hover .card__button-icon_saved,
+.card__button:focus .card__button-icon_saved {
+  color: #347eff;
+  fill: #347eff;
+}
+
+
+
+.card__button:before {
+  content: 'Sign in to save articles';
+  display: block;
+  background: #fff;
+  border-radius: 8px;
+  position: absolute;
+  right: calc(100% + 20px);
+  top: 0;
+  width: 26ch;
+  height: 40px;
+  font-size: 12px;
+  line-height: 40px;
+  font-weight: 500;
+  padding: 0;
+  text-align: center;
+  opacity: 0;
+  transition: 0.35s all 0.1s ease-in-out;
+}
+
+.card__button:hover:before,
+.card__button:focus:before {
+  opacity: 1;
+  right: calc(100% + 5px);
+}

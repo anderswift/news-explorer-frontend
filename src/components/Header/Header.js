@@ -5,13 +5,13 @@ import './Header.css';
 
 
 
-function Header() {
+function Header({ handleSearch }) {
   return (
     <header className="header">
       
       <Navigation/>
 
-      <SearchForm />
+      <SearchForm handleSearch={handleSearch} />
 
     </header>
   );
