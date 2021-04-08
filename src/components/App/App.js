@@ -6,8 +6,6 @@ import './App.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
-import Footer from '../Footer/Footer';
-
 
 
 function App() {
@@ -30,8 +28,6 @@ function App() {
         </Route>
 
       </Switch>
-
-      <Footer />
 
     </CurrentUserContext.Provider>
   );

@@ -3,9 +3,12 @@ import { useState, useEffect } from 'react';
 import { api } from '../../utils/api.js';
 
 import Header from '../Header/Header.js';
-import SearchResults from '../SearchResults/SearchResults.js';
+import NewsCardList from '../NewsCardList/NewsCardList.js';
 import AboutAuthor from '../AboutAuthor/AboutAuthor.js';
+import Footer from '../Footer/Footer';
 
+
+import '../Container/Container.css';
 
 function Main() {
 
@@ -25,6 +28,7 @@ function Main() {
       .then((cards) => {
         setIsLoading(false);
         setCards(cards); 
+        console.log(cards);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -34,13 +38,19 @@ function Main() {
 
 
   return (
-    <>
+    <div class="container">
       <Header handleSearch={searchByKeyword} />
       
-      <SearchResults cards={cards} isLoading={isLoading} />
+      {(cards.length || isLoading) ? 
+        <NewsCardList cards={cards} isLoading={isLoading} isSearch={true} />
+        : 
+        null
+      }
 
-      <AboutAuthor />
-    </>
+      <AboutAuthor/>
+
+      <Footer/>
+    </div>
   );
 }
 
