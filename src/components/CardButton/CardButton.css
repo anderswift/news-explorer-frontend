@@ -5,8 +5,8 @@
   height: 40px;
   padding: 0;
   position: absolute;
-  top: 24px;
-  right: 24px;
+  top: 16px;
+  right: 16px;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -69,4 +69,48 @@
 .card__button:focus:before {
   opacity: 1;
   right: calc(100% + 5px);
+}
+
+
+@media only screen and (min-width: 400px) {
+
+
+
+}
+
+
+@media only screen and (min-width: 550px) {
+
+
+
+}
+
+
+@media only screen and (min-width: 768px) {
+
+  .card__button {
+    top: 8px;
+    right: 8px; 
+  }
+
+}
+
+
+@media only screen and (min-width: 1024px) {
+
+  .card__button {
+    top: 16px;
+    right: 16px; 
+  }
+
+}
+
+
+@media only screen and (min-width: 1200px) {
+
+  .card__button {
+    top: 24px;
+    right: 24px; 
+  }
+
 }

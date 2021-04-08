@@ -16,7 +16,8 @@
   gap: 10px;
 }
 
-@media only screen and (min-width: 480px) {
+
+@media only screen and (min-width: 550px) {
 
   .search-results__list {
     grid-template-columns: repeat(2, 1fr);
@@ -40,8 +41,15 @@
 
 @media only screen and (min-width: 1024px) {
   
-  .search-results { padding: 80px; }
+  .search-results { padding: 80px 40px; }
 
   .search-results__list { gap: 16px; }
+
+}
+
+
+@media only screen and (min-width: 1200px) {
+
+  .search-results { padding: 80px; }
 
 }

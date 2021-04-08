@@ -11,6 +11,20 @@ function Card({ card }) {
     date.toLocaleString('en-us', { month: 'long' }) + ' ' 
     + date.getDate() + ', ' 
     + date.getFullYear();
+  
+
+
+  function truncate(text, limit) {
+    if(text.length < limit) return text;
+    else {
+      let truncated = text.substring(0, limit);
+      const punctuation = ['.', ',', '?', '!'];
+      truncated = truncated.substring(0, truncated.lastIndexOf(' '));
+
+      if (!punctuation.includes(truncated[truncated.length-1])) return truncated + '...';
+      else return truncated.substring(0, truncated.length-1) + '...';
+    }
+  }
 
 
   return (
@@ -22,10 +36,10 @@ function Card({ card }) {
         <header className="card__header">
           <time className="card__date" dateTime={card.publishedAt}>{formattedDate}</time>
           <a className="card__link link" href={card.url}>
-            <h3 className="card__title">{card.title}</h3>
+            <h3 className="card__title">{truncate(card.title, 60)}</h3>
           </a>
         </header>
-        <p className="card__description">{card.description}</p>
+        <p className="card__description">{truncate(card.description, 180)}</p>
         <footer className="card__source">{card.source.name}</footer>
       </article>
     </li>
