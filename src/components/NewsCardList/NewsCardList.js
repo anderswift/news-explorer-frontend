@@ -15,11 +15,11 @@ function NewsCardList({ cards, isLoading, isSearch }) {
         :
         <>
           {isSearch ? <h3 className="news-cards__heading">Search results</h3> : null}
-          
+
           <ul className="news-cards__list list">
 
             {cards.map((card, index) => (
-              <Card card={card} key={index} />
+              <Card card={card} key={index} isSavedNews={!isSearch} />
             ))}
 
           </ul>

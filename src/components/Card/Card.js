@@ -2,9 +2,10 @@ import CardButton from '../CardButton/CardButton';
 
 
 import '../Link/Link.css';
+import '../Button/Button.css';
 import './Card.css';
 
-function Card({ card }) {
+function Card({ card, isSavedNews }) {
 
   const date = new Date(card.publishedAt);
   const formattedDate = 
@@ -17,8 +18,8 @@ function Card({ card }) {
   function truncate(text, limit) {
     if(text.length < limit) return text;
     else {
-      let truncated = text.substring(0, limit);
       const punctuation = ['.', ',', '?', '!'];
+      let truncated = text.substring(0, limit);
       truncated = truncated.substring(0, truncated.lastIndexOf(' '));
 
       if (!punctuation.includes(truncated[truncated.length-1])) return truncated + '...';
@@ -29,9 +30,19 @@ function Card({ card }) {
 
   return (
     <li className="card">
-      <CardButton icon="save" isSaved={true} />
+      {isSavedNews ?
+        <>
+          <button type="button" className="card__button_keyword card__button button" aria-label={`Filter by keyword: ${card.keyword}`}>
+            {card.keyword}
+          </button>
+          <CardButton icon="delete"/>
+        </>
+        :
+        <CardButton icon="save"/>
+      }
 
       <img className="card__image" src={card.urlToImage} alt={card.name}  />
+
       <article className="card__article">
         <header className="card__header">
           <time className="card__date" dateTime={card.publishedAt}>{formattedDate}</time>
@@ -42,6 +53,7 @@ function Card({ card }) {
         <p className="card__description">{truncate(card.description, 180)}</p>
         <footer className="card__source">{card.source.name}</footer>
       </article>
+      
     </li>
   );
 }

@@ -6,6 +6,7 @@
   border: none;
   outline: none;
   margin: 0;
+  transition: color .35s ease-in-out;
 }
 
 .button:hover, 

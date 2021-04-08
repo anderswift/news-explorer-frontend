@@ -58,20 +58,6 @@ function SavedNews() {
       {
         "source": {
             "id": null,
-            "name": "Gizmodo.com"
-        },
-        "keyword": "travel",
-        "author": "Daniel Kolitz",
-        "title": "Could Time Travel Ever Work?",
-        "description": "Scientists, or at least their wild-haired fictional counterparts, promised us time travel and still have not delivered. Forget walking with dinosaurs or killing baby Hitler; I’d be happy just to warn my month-ago self not to make all the mistakes he’s about t…",
-        "url": "https://gizmodo.com/could-time-travel-ever-work-1846463072",
-        "urlToImage": "https://i.kinja-img.com/gawker-media/image/upload/c_fill,f_auto,fl_progressive,g_center,h_675,pg_1,q_80,w_1200/ezzjzzznhy4dm8lfohun.png",
-        "publishedAt": "2021-03-15T13:10:00Z",
-        "content": "Scientists, or at least their wild-haired fictional counterparts, promised us time travel and still have not delivered. Forget walking with dinosaurs or killing baby Hitler; Id be happy just to warn … [+17786 chars]"
-      },
-      {
-        "source": {
-            "id": null,
             "name": "Lifehacker.com"
         },
         "keyword": "travel",
@@ -88,6 +74,7 @@ function SavedNews() {
             "id": "the-verge",
             "name": "The Verge"
         },
+        "keyword": "pandemic",
         "author": "Mary Beth Griggs",
         "title": "We’re on the knife’s edge of the pandemic",
         "description": "In the US, great joy co-exists with deep worries about the current state of the COVID-19 pandemic, as vaccinations increase, and case counts rise.",
