@@ -8,23 +8,30 @@ import './SignInOutButton.css';
 
 
 
-function SignInOutButton({ isSavedNewsHeader}) {
+function SignInOutButton({ isSavedNewsHeader, logout, openLoginPopup }) {
 
   const currentUserContext = useContext(CurrentUserContext);
 
   return (
     currentUserContext.isLoggedIn ?
       <li>
-        <button type="button" className={`button menu__button menu__button_logged-in${isSavedNewsHeader ? ' menu__button_saved-news' : ''}`}>
+        <button type="button" className={`button menu__button menu__button_logged-in${isSavedNewsHeader ? ' menu__button_saved-news' : ''}`}
+           onClick={logout}>
+
           {currentUserContext.currentUser.username}
+
           <svg className="menu__icon button__icon">
             <use xlinkHref={`${logoutIcon}#logout`}></use>
           </svg>
+
         </button>
       </li>
       :
       <li>
-        <button type="button" className={`button menu__button menu__button_signin${isSavedNewsHeader ? ' menu__button_saved-news' : ''}`}>Sign In</button>
+        <button type="button" className={`button menu__button menu__button_signin${isSavedNewsHeader ? ' menu__button_saved-news' : ''}`}
+          onClick={openLoginPopup}>
+          Sign In
+        </button>
       </li>
   );
 }

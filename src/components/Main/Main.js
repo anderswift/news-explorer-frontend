@@ -8,9 +8,7 @@ import AboutAuthor from '../AboutAuthor/AboutAuthor.js';
 import Footer from '../Footer/Footer';
 
 
-import '../Container/Container.css';
-
-function Main() {
+function Main({ logout, openLoginPopup }) {
 
   const [keyword, setKeyword] = useState('');
   const [cards, setCards] = useState([]);
@@ -38,11 +36,11 @@ function Main() {
 
 
   return (
-    <div class="container">
-      <Header handleSearch={searchByKeyword} />
+    <>
+      <Header handleSearch={searchByKeyword} logout={logout} openLoginPopup={openLoginPopup} />
       
       {(cards.length || isLoading) ? 
-        <NewsCardList cards={cards} isLoading={isLoading} isSearch={true} />
+        <NewsCardList cards={cards} isLoading={isLoading} isSearch={true} openLoginPopup={openLoginPopup} />
         : 
         null
       }
@@ -50,7 +48,7 @@ function Main() {
       <AboutAuthor/>
 
       <Footer/>
-    </div>
+    </>
   );
 }
 

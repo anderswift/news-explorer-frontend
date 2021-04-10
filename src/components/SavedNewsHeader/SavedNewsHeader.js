@@ -4,7 +4,7 @@ import SavedNewsIntro from '../SavedNewsIntro/SavedNewsIntro';
 
 import './SavedNewsHeader.css';
 
-function SavedNewsHeader({ cardCount }) {
+function SavedNewsHeader({ cardCount, logout, openLoginPopup }) {
 
   const keywords = ['nature','Yellowstone','travel','pandemic'];
 
@@ -12,7 +12,7 @@ function SavedNewsHeader({ cardCount }) {
   return (
     <header className="header header_saved-news">
 
-      <Navigation isSavedNewsHeader={true} />
+      <Navigation isSavedNewsHeader={true} logout={logout} openLoginPopup={openLoginPopup} />
 
       <SavedNewsIntro keywords={keywords} cardCount={4} />
 

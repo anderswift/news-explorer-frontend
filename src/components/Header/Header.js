@@ -5,11 +5,11 @@ import './Header.css';
 
 
 
-function Header({ handleSearch }) {
+function Header({ handleSearch, logout, openLoginPopup }) {
   return (
     <header className="header">
       
-      <Navigation/>
+      <Navigation logout={logout} openLoginPopup={openLoginPopup} />
 
       <SearchForm handleSearch={handleSearch} />
 

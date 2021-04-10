@@ -23,13 +23,41 @@
   transition: background-color .35s ease-in-out;
 }
 
-.button_submit:hover, 
-.button_submit:focus {
+.button_submit:hover {
   background: #347eff;
   outline: none;
 }
 
+.button_submit:focus {
+  background: #347eff;
+  outline: 1px dotted rgb(170, 170, 170, 0.75);
+  outline-offset: 3px; 
+}
+
 .button_submit:active { background: #2a65cc; }
+
+.button_disabled,
+.button_disabled:hover,
+.button_disabled:focus,
+.button_disabled:active {
+  background: #e6e8eB;
+  color: #b6bcbf;
+  cursor: not-allowed;
+	pointer-events: none;
+}
+
+.button_link {
+  display: inline;
+  padding: 0;
+  background: transparent;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.button_link:focus { 
+  outline: 1px dotted rgb(170, 170, 170, 0.75);
+  outline-offset: 3px; 
+}
 
 .button__icon { pointer-events: none; }
 

@@ -1,2 +1,20 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container_overlaid {
+  max-height: 100vh;
+  overflow-y: hidden;
+}
 
 
+@media only screen and (min-width: 768px) {
+
+  .container_overlaid {
+    max-height: none;
+    overflow-y: visible;
+  }
+
+}

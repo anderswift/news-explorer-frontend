@@ -1,22 +1,31 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+
+import { CurrentUserContext } from '../../contexts/CurrentUserContext'; 
 
 
 import '../Button/Button.css';
 import './CardButton.css';
 
-function CardButton({ icon }) {
+function CardButton({ icon, openLoginPopup }) {
+
+  const currentUserContext = useContext(CurrentUserContext);
 
   const [isSaved, setIsSaved] = useState(false);
 
+
   const handleSave = (e) => {
-    setIsSaved(!isSaved);
-    console.log(e.target);
+    e.preventDefault();
+    if(!currentUserContext.isLoggedIn) openLoginPopup();
+    else setIsSaved(!isSaved);
     e.target.blur();
   }
 
   return (
-      <button type="button" aria-label="Save Article" className={`button card__button card__button_${icon}`} onClick={handleSave}>
-        <svg className={`button__icon card__button-icon card__button-icon_${icon}} ${isSaved ? 'card__button-icon_saved' : ''}`} 
+      <button type="button" aria-label="Save Article" 
+        className={`button card__button card__button_${icon}${!currentUserContext.isLoggedIn ? ' card__button_logged-out' : ''}`} 
+        onClick={handleSave}>
+
+        <svg className={`button__icon card__button-icon card__button-icon_${icon}${isSaved ? ' card__button-icon_saved' : ''}`} 
           width="24" height="24" viewBox="0 0 24 24">
           {icon === 'save' && 
             <path stroke="currentColor" strokeWidth="2" 

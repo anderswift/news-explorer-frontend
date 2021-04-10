@@ -5,9 +5,7 @@ import NewsCardList from '../NewsCardList/NewsCardList.js';
 import Footer from '../Footer/Footer';
 
 
-import '../Container/Container.css';
-
-function SavedNews() {
+function SavedNews({ logout, openLoginPopup }) {
 
   // temporary sample cards for testing
   const [cards, setCards] = useState(
@@ -89,13 +87,13 @@ function SavedNews() {
   
 
   return (
-    <div class="container">
-      <SavedNewsHeader cardCount={cards.length} />
+    <>
+      <SavedNewsHeader cardCount={cards.length} logout={logout} openLoginPopup={openLoginPopup} />
       
       { cards.length ? <NewsCardList cards={cards} /> : null }
 
       <Footer />
-    </div>
+    </>
   );
 }
 

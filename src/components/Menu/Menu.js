@@ -9,7 +9,7 @@ import '../Link/Link.css';
 import '../List/List.css';
 import './Menu.css';
 
-function Menu({ isSavedNewsHeader = false, isMenuOpen = true }) {
+function Menu({ isSavedNewsHeader = false, isMenuOpen = true, logout, openLoginPopup }) {
 
   const currentUserContext = useContext(CurrentUserContext);
 
@@ -30,7 +30,7 @@ function Menu({ isSavedNewsHeader = false, isMenuOpen = true }) {
         </li>
       }
 
-      <SignInOutButton isSavedNewsHeader={isSavedNewsHeader} />
+      <SignInOutButton isSavedNewsHeader={isSavedNewsHeader} logout={logout} openLoginPopup={openLoginPopup} />
 
     </ul>
   );

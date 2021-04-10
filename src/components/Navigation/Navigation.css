@@ -6,9 +6,7 @@
   z-index: 2;
   height: 56px;
   padding: 0 16px;
-  transition: 
-    background-color .35s ease-in-out, 
-    box-shadow .35s ease-in-out;
+  transition: background-color .35s ease-in-out;
 }
 
 .navigation_saved-news { color: #000; }

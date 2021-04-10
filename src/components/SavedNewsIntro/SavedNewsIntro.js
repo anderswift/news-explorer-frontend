@@ -29,13 +29,13 @@ function SavedNewsIntro({ cardCount, keywords }) {
         <ul className="saved-news-intro__keyword-list list">
           {displayedKeywords.map((keyword, index) => (
             <li className="saved-news-intro__keyword-item">
-              <button className="button link saved-news-intro__keyword-button" type="button">{keyword}</button>
+              <button className="button button_link link saved-news-intro__keyword-button" type="button">{keyword}</button>
             </li>
           ))}
         
           { keywords.length !== displayedKeywords.length ? 
             <li className="saved-news-intro__keyword-item">
-              <button className="button link saved-news-intro__keyword-button saved-news-intro__keyword-button_more" 
+              <button className="button button_link link saved-news-intro__keyword-button saved-news-intro__keyword-button_more" 
                 type="button" onClick={showAllKeywords} aria-label={`show ${keywords.length - 2} more keywords`}>
                   and {keywords.length - 2} more
               </button>

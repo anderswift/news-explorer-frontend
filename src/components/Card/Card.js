@@ -5,14 +5,13 @@ import '../Link/Link.css';
 import '../Button/Button.css';
 import './Card.css';
 
-function Card({ card, isSavedNews }) {
+function Card({ card, isSavedNews, openLoginPopup }) {
 
   const date = new Date(card.publishedAt);
   const formattedDate = 
     date.toLocaleString('en-us', { month: 'long' }) + ' ' 
     + date.getDate() + ', ' 
     + date.getFullYear();
-  
 
 
   function truncate(text, limit) {
@@ -38,7 +37,7 @@ function Card({ card, isSavedNews }) {
           <CardButton icon="delete"/>
         </>
         :
-        <CardButton icon="save"/>
+        <CardButton icon="save" openLoginPopup={openLoginPopup} />
       }
 
       <img className="card__image" src={card.urlToImage} alt={card.name}  />

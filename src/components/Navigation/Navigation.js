@@ -9,7 +9,7 @@ import Menu from '../Menu/Menu';
 import './Navigation.css';
 
 
-function Navigation({ isSavedNewsHeader = false }) {
+function Navigation({ isSavedNewsHeader = false, logout, openLoginPopup }) {
 
   
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,7 +30,7 @@ function Navigation({ isSavedNewsHeader = false }) {
 
       <MenuToggleButton isMenuOpen={isMenuOpen} handleClick={toggleMenu} />
 
-      <Menu isMenuOpen={isMenuOpen} isSavedNewsHeader={isSavedNewsHeader} />
+      <Menu isMenuOpen={isMenuOpen} isSavedNewsHeader={isSavedNewsHeader} logout={logout} openLoginPopup={openLoginPopup}  />
 
     </nav>   
   );

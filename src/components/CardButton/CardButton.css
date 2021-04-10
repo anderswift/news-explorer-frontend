@@ -21,7 +21,7 @@
   right: 16px; 
 }
 
-.card__button_save:before {
+.card__button_logged-out:before {
   content: 'Sign in to save articles';
   display: block;
   background: #fff;
@@ -40,8 +40,8 @@
   transition: 0.35s all 0.1s ease-in-out;
 }
 
-.card__button_save:hover:before,
-.card__button_save:focus:before {
+.card__button_logged-out:hover:before,
+.card__button_logged-out:focus:before {
   opacity: 1;
   right: calc(100% + 5px);
 }

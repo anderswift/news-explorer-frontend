@@ -5,7 +5,7 @@ import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
 import '../List/List.css';
 import './NewsCardList.css';
 
-function NewsCardList({ cards, isLoading, isSearch }) {
+function NewsCardList({ cards, isLoading, isSearch, openLoginPopup }) {
 
 
   return (
@@ -19,7 +19,7 @@ function NewsCardList({ cards, isLoading, isSearch }) {
           <ul className="news-cards__list list">
 
             {cards.map((card, index) => (
-              <Card card={card} key={index} isSavedNews={!isSearch} />
+              <Card card={card} key={index} isSavedNews={!isSearch} openLoginPopup={openLoginPopup} />
             ))}
 
           </ul>

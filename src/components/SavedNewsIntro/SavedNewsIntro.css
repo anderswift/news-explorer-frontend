@@ -28,9 +28,7 @@
   margin: 0;
 }
 
-.saved-news-intro__keyword-list {
-  display: inline;
-}
+.saved-news-intro__keyword-list { display: inline; }
 
 .saved-news-intro__keyword-item { 
   display: inline; 
@@ -43,12 +41,9 @@
 .saved-news-intro__keyword-item:last-child:after { content: ''; }
 
 .saved-news-intro__keyword-button { 
-  display: inline; 
   text-transform: capitalize;
   font-size: 18px;
   line-height: 24px;
-  padding: 0;
-  background: transparent;
 }
 
 .saved-news-intro__keyword-button_more {
@@ -63,9 +58,7 @@
 
   .saved-news-intro__title { font-size: 14px; }
 
-  .saved-news-intro__count { 
-    margin: 16px 0;
-  }
+  .saved-news-intro__count { margin: 16px 0; }
 
 }
 
