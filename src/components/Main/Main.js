@@ -39,8 +39,8 @@ function Main({ logout, openLoginPopup }) {
     <>
       <Header handleSearch={searchByKeyword} logout={logout} openLoginPopup={openLoginPopup} />
       
-      {(cards.length || isLoading) ? 
-        <NewsCardList cards={cards} isLoading={isLoading} isSearch={true} openLoginPopup={openLoginPopup} />
+      {(keyword || isLoading) ? 
+        <NewsCardList cards={cards} isLoading={isLoading} isSearch={true} openLoginPopup={openLoginPopup} keyword={keyword} />
         : 
         null
       }

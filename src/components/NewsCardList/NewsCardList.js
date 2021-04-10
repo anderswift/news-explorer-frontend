@@ -1,11 +1,14 @@
 import Preloader from '../Preloader/Preloader';
+import NoNewsResults from '../NoNewsResults/NoNewsResults';
 import Card from '../Card/Card';
 import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
+
 
 import '../List/List.css';
 import './NewsCardList.css';
 
-function NewsCardList({ cards, isLoading, isSearch, openLoginPopup }) {
+
+function NewsCardList({ cards, isLoading, isSearch, openLoginPopup, keyword }) {
 
 
   return (
@@ -14,18 +17,27 @@ function NewsCardList({ cards, isLoading, isSearch, openLoginPopup }) {
         <Preloader /> 
         :
         <>
-          {isSearch ? <h3 className="news-cards__heading">Search results</h3> : null}
+          {cards.length === 0 ? 
 
-          <ul className="news-cards__list list">
+            <NoNewsResults />
+            :
+            <>
+            {isSearch ? <h3 className="news-cards__heading">Search results</h3> : null}
 
-            {cards.map((card, index) => (
-              <Card card={card} key={index} isSavedNews={!isSearch} openLoginPopup={openLoginPopup} />
-            ))}
+              <ul className="news-cards__list list">
 
-          </ul>
-          <ShowMoreButton />
+                {cards.map((card, index) => (
+                  <Card card={card} key={index} isSavedNews={!isSearch} openLoginPopup={openLoginPopup} />
+                ))}
+
+              </ul>
+              <ShowMoreButton />
+            </>
+
+          }
         </>
-      }
+
+      }    
     </section>
   );
 }
