@@ -1,15 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
-import NewsCardList from '../NewsCardList/NewsCardList.js';
+import NewsCardList from '../NewsCardList/NewsCardList';
 import Footer from '../Footer/Footer';
 
 
 function SavedNews({ logout, openLoginPopup }) {
 
   // temporary sample cards for testing
-  const [cards, setCards] = useState(
-    [
+  const [cards, setCards] = useState([]);
+
+
+  useEffect(() => {
+    // just set some sample cards for now, will switch to retrieve from API later
+    setCards([
       {
         "source": {
             "id": "bbc-news",
@@ -81,9 +85,8 @@ function SavedNews({ logout, openLoginPopup }) {
         "publishedAt": "2021-04-03T14:00:00Z",
         "content": "Antivirus: a weekly digest of COVID-19 research and development\r\nA vaccine site that opened in Louisville, Kentucky on April 2, 2021, as cases rose in the state.\r\nPhoto by Jon Cherry/Getty Images\r\nTh… [+5496 chars]"
       }
-    ]
-  );
-
+    ]);
+  }, []);
   
 
   return (

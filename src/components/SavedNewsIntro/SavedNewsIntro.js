@@ -1,7 +1,6 @@
 import { useState, useContext } from 'react';
 
-import { CurrentUserContext } from '../../contexts/CurrentUserContext'; 
-
+import CurrentUserContext from '../../contexts/CurrentUserContext'; 
 
 import '../List/List.css';
 import '../Button/Button.css';

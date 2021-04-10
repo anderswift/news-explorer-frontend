@@ -6,33 +6,49 @@ import '../Button/Button.css';
 import './PopupWithForm.css';
 
 
-function PopupWithForm(props) {
+function PopupWithForm({ isOpen, onClose, onSubmit, onReset, name, heading, children }) {
 
   const formRef = useRef();
 
-
-  const resetOnEsc= (e) => { 
-    if(e.key === 'Escape') formRef.current.reset();
+  const closeOnEsc = (e) => { 
+    if(e.key === 'Escape') {
+      onClose();
+      formRef.current.reset();
+      document.removeEventListener('keyup', closeOnEsc);
+      document.removeEventListener('click', closeOnClickAway);
+    }
   }
 
+  const closeOnClickAway = (e) => { 
+    if (!formRef.current.contains(e.target)) {
+      onClose();
+      formRef.current.reset();
+      document.removeEventListener('keyup', closeOnEsc);
+      document.removeEventListener('click', closeOnClickAway);
+    }
+  }
 
   useEffect(() => {
-    if(props.isOpen) document.addEventListener('keyup', resetOnEsc);
-    else document.removeEventListener('keyup', resetOnEsc);
-  }, [props.isOpen]);
+
+    if(isOpen) {
+      document.addEventListener('keyup', closeOnEsc);
+      document.addEventListener('click', closeOnClickAway);
+    }
+
+  }, [isOpen]);
 
 
   return (
-    <div className={`popup ${props.isOpen ? 'popup_open' : ''}`}>
-      <form ref={formRef} name={`${props.name}-form`} className={`popup__form form form_${props.name}`} 
-        onSubmit={props.onSubmit} 
-        onReset={() => setTimeout(() => { props.onReset && props.onReset(); }, 200)}>
+    <div className={`popup ${isOpen ? 'popup_open' : ''}`}>
+      <form ref={formRef} name={`${name}-form`} className={`popup__form form form_${name}`} 
+        onSubmit={onSubmit} 
+        onReset={() => setTimeout(() => { onReset && onReset(); }, 200)}>
         
-        <h4 className="form__heading">{props.heading}</h4>
+        <h4 className="form__heading">{heading}</h4>
         
-        {props.children}
+        {children}
         
-        <button type="reset" className="popup__exit button" aria-label="Close" onClick={props.onClose}>
+        <button type="reset" className="popup__exit button" aria-label="Close" onClick={onClose}>
           <svg className="popup__exit-icon">
             <use xlinkHref={`${closeIcon}#close`}></use>
           </svg>

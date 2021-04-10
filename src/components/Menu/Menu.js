@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 import SignInOutButton from '../SignInOutButton/SignInOutButton';
 

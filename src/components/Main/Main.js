@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
-import { api } from '../../utils/api.js';
+import api from '../../utils/api';
 
-import Header from '../Header/Header.js';
-import NewsCardList from '../NewsCardList/NewsCardList.js';
-import AboutAuthor from '../AboutAuthor/AboutAuthor.js';
+import Header from '../Header/Header';
+import NewsCardList from '../NewsCardList/NewsCardList';
+import AboutAuthor from '../AboutAuthor/AboutAuthor';
 import Footer from '../Footer/Footer';
 
 
@@ -21,17 +21,19 @@ function Main({ logout, openLoginPopup }) {
 
 
   useEffect(() => {
-    if(keyword !== '') setIsLoading(true);
-    api.getCardsByKeyword(keyword)
-      .then((cards) => {
-        setIsLoading(false);
-        setCards(cards); 
-        console.log(cards);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        console.log(err);
-      });
+    if(keyword !== '') {
+      setIsLoading(true);
+      api.getCardsByKeyword(keyword)
+        .then((cards) => {
+          setIsLoading(false);
+          setCards(cards); 
+          console.log(cards);
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          console.log(err);
+        });
+    }
   }, [keyword]);
 
 

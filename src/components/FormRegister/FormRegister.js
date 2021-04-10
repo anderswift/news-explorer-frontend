@@ -6,8 +6,7 @@ import FormField from '../FormField/FormField';
 
 
 function FormRegister({isOpen, isSaving, onClose, onSubmit, openLoginPopup}) {
-  console.log('testtest');
-
+  
   const defaultValues = { email: '', username: '', password: '' };
   const [values, setValues] = useState(defaultValues);
   const [errors, setErrors] = useState({});

@@ -1,12 +1,10 @@
 import { useContext } from 'react';
 
-import { CurrentUserContext } from '../../contexts/CurrentUserContext'; 
+import CurrentUserContext from '../../contexts/CurrentUserContext'; 
 
 import logoutIcon from '../../images/logout.svg';
 import '../Button/Button.css';
 import './SignInOutButton.css';
-
-
 
 function SignInOutButton({ isSavedNewsHeader, logout, openLoginPopup }) {
 
