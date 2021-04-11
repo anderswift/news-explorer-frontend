@@ -14,8 +14,7 @@
   transition: 
     .35s opacity .35s ease-in-out,
     .35s background-color .35s ease-in-out,
-    .5s top .35s ease-in-out,
-    .35s visibility .35s ease-in-out;
+    .5s top .35s ease-in-out;
 }
 
 .menu_open {
@@ -26,8 +25,7 @@
   transition: 
     .35s opacity .35s ease-in-out,
     .35s background-color .35s ease-in-out,
-    .35s top .35s ease-in-out,
-    .35s visibility .35s ease-in-out;
+    .35s top .35s ease-in-out;
 }
 
 .menu_saved-news.menu_open { background: #fff; }
