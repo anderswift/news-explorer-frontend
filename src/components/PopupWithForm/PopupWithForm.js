@@ -29,7 +29,7 @@ function PopupWithForm({ isOpen, onClose, onSubmit, onReset, name, heading, chil
         
         {children}
         
-        <button type="reset" className="popup__exit button" aria-label="Close" onClick={onClose}>
+        <button type="reset" className="popup__exit button" aria-label="Close form" onClick={onClose}>
           <svg className="popup__exit-icon">
             <use xlinkHref={`${closeIcon}#close`}></use>
           </svg>

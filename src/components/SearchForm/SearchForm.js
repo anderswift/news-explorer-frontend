@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-
+import '../Input/Input.css';
 import '../Button/Button.css';
 import './SearchForm.css';
 
@@ -27,7 +27,7 @@ function SearchForm({ handleSearch }) {
       <p className="search__desc">Find the latest news on any topic and save articles in your personal account.</p>
       
       <fieldset className="search__bar">
-        <input className="search__field" type="text" placeholder="Enter topic" onChange={handleChange} />
+        <input className="input search__field" type="text" placeholder="Enter topic" onChange={handleChange} />
         <button className="search__button button button_submit" type="submit">Search</button>
       </fieldset>
 

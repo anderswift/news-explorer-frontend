@@ -14,7 +14,7 @@ function SignInOutButton({ isSavedNewsHeader, logout, openLoginPopup }) {
     currentUserContext.isLoggedIn ?
       <li>
         <button type="button" className={`button menu__button menu__button_logged-in${isSavedNewsHeader ? ' menu__button_saved-news' : ''}`}
-           onClick={logout}>
+           onClick={logout} aria-label={`Logout ${currentUserContext.currentUser.username}`}>
 
           {currentUserContext.currentUser.username}
 

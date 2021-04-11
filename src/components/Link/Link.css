@@ -5,13 +5,13 @@
   transition: color 0.35s ease-in-out;
 }
 
+.link:hover,
 .link:focus {
-  outline: 1px dotted rgb(170, 170, 170, 0.75);
-  outline-offset: 3px;
+  outline: none;
   color: #2f71e5;
 }
 
-.link:hover {
-  outline: none;
-  color: #2f71e5;
+.link:focus-visible {
+  outline: 2px dotted #e89d22;
+  outline-offset: 4px; 
 }

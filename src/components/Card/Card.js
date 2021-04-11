@@ -20,7 +20,20 @@ function Card({ card, isSavedNews, openLoginPopup }) {
   }
 
   return (
+    
     <li className="card">
+      <a className="card__link" href={card.url} target="_blank" rel="noreferrer">
+        <img className="card__image" src={card.urlToImage} alt={card.name} />
+      
+        <article className="card__article">
+          <header className="card__header">
+            <time className="card__date" dateTime={card.publishedAt}>{formattedDate}</time>
+            <h3 className="card__title">{truncate(card.title, 60)}</h3>
+          </header>
+          <p className="card__description">{truncate(card.description, 180)}</p>
+          <footer className="card__source">{card.source.name}</footer>
+        </article>
+      </a>
       {isSavedNews
         ? (
           <>
@@ -31,21 +44,8 @@ function Card({ card, isSavedNews, openLoginPopup }) {
           </>
         )
         : <CardButton icon="save" openLoginPopup={openLoginPopup} />}
-
-      <img className="card__image" src={card.urlToImage} alt={card.name} />
-
-      <article className="card__article">
-        <header className="card__header">
-          <time className="card__date" dateTime={card.publishedAt}>{formattedDate}</time>
-          <a className="card__link link" href={card.url}>
-            <h3 className="card__title">{truncate(card.title, 60)}</h3>
-          </a>
-        </header>
-        <p className="card__description">{truncate(card.description, 180)}</p>
-        <footer className="card__source">{card.source.name}</footer>
-      </article>
-
     </li>
+    
   );
 }
 

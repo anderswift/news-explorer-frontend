@@ -36,6 +36,10 @@
   border-color: #000;
 }
 
+.menu__button:focus-visible, 
+.menu__button_saved-news:focus-visible {
+  border-color: #e89d22;
+}
 
 .menu__icon {
   height: 24px;
