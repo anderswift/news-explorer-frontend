@@ -10,6 +10,11 @@ function SignInOutButton({ isSavedNewsHeader, logout, openLoginPopup }) {
 
   const currentUserContext = useContext(CurrentUserContext);
 
+  const onSignInClick = (e) => {
+    e.preventDefault();
+    openLoginPopup();
+  }
+
   return (
     currentUserContext.isLoggedIn ?
       <li>
@@ -27,7 +32,7 @@ function SignInOutButton({ isSavedNewsHeader, logout, openLoginPopup }) {
       :
       <li>
         <button type="button" className={`button menu__button menu__button_signin${isSavedNewsHeader ? ' menu__button_saved-news' : ''}`}
-          onClick={openLoginPopup}>
+          onClick={onSignInClick}>
           Sign In
         </button>
       </li>

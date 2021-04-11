@@ -1,6 +1,18 @@
+import { useEffect, useRef } from "react";
+
 import './FormField.css';
 
 function FormField({ name, label, description, type, minMax, value, error, handleChange, focusOnOpen = false }) {
+
+  const fieldRef = useRef();
+
+  useEffect(() => {
+    console.log('focusOnOpen: '+focusOnOpen+', fieldRef: '+fieldRef);
+    if(focusOnOpen && fieldRef) {
+      console.log('so, should focus now?');
+      fieldRef.current.focus();
+    }
+  }, [focusOnOpen, fieldRef]);
 
   return (
     <>
@@ -17,6 +29,7 @@ function FormField({ name, label, description, type, minMax, value, error, handl
         value={value} 
         onChange={handleChange}
         autoComplete={type === 'password' ? `news-explorer ${name}` : ''}
+        ref={fieldRef}
         required />
       <span className={`form__error${error ? ' form__error_active' : ''}`}>{error}</span>
     </>

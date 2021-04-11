@@ -49,7 +49,7 @@ function FormLogin({isOpen, isSaving, onClose, onSubmit, openRegisterPopup}) {
     <PopupWithForm heading="Sign In" name="login" isOpen={isOpen} onClose={onClose} onReset={handleReset}
       onSubmit={handleSubmit}>
 
-      <FormField name="login-email" minMax={[5, 320]} handleChange={handleChange}
+      <FormField name="login-email" minMax={[5, 320]} handleChange={handleChange} focusOnOpen={isOpen}
         value={values.email} error={errors.email} type="email" label="Email" description="Enter email" />
 
       <FormField name="login-password" minMax={[10, 256]} handleChange={handleChange} 
