@@ -10,36 +10,17 @@ function PopupWithForm({ isOpen, onClose, onSubmit, onReset, name, heading, chil
 
   const formRef = useRef();
 
-  const closeOnEsc = (e) => { 
-    if(e.key === 'Escape') {
-      onClose();
-      formRef.current.reset();
-      document.removeEventListener('keyup', closeOnEsc);
-      document.removeEventListener('click', closeOnClickAway);
-    }
-  }
-
   const closeOnClickAway = (e) => { 
-    if (!formRef.current.contains(e.target)) {
-      onClose();
-      formRef.current.reset();
-      document.removeEventListener('keyup', closeOnEsc);
-      document.removeEventListener('click', closeOnClickAway);
-    }
+    if (!formRef.current.contains(e.target)) onClose();
   }
 
   useEffect(() => {
-
-    if(isOpen) {
-      document.addEventListener('keyup', closeOnEsc);
-      document.addEventListener('click', closeOnClickAway);
-    }
-
+    if(!isOpen) formRef.current.reset();
   }, [isOpen]);
 
 
   return (
-    <div className={`popup ${isOpen ? 'popup_open' : ''}`}>
+    <div className={`popup ${isOpen ? 'popup_open' : ''}`} onClick={closeOnClickAway} >
       <form ref={formRef} name={`${name}-form`} className={`popup__form form form_${name}`} 
         onSubmit={onSubmit} 
         onReset={() => setTimeout(() => { onReset && onReset(); }, 200)}>

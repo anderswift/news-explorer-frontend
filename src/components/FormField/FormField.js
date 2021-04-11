@@ -1,26 +1,24 @@
-
-
 import './FormField.css';
 
-function FormField(props) {
+function FormField({ name, label, description, type, minMax, value, error, handleChange, focusOnOpen = false }) {
 
   return (
     <>
-      <label className="form__label">{props.label}</label>
+      <label className="form__label">{label}</label>
       <input 
-        type={props.type === undefined ? 'text' : props.type} 
-        name={props.name}
-        id={props.name} 
-        className={`form__field${props.error ? ' form__field_type_error': ''}`} 
-        aria-label={props.label} 
-        placeholder={props.description} 
-        minLength={props.minMax ? props.minMax[0] : undefined}
-        maxLength={props.minMax ? props.minMax[1] : undefined} 
-        value={props.value} 
-        onChange={props.handleChange}
-        autoComplete={props.type === 'password' ? `news-explorer ${props.name}` : ''}
+        type={type === undefined ? 'text' : type} 
+        name={name}
+        id={name} 
+        className={`form__field${error ? ' form__field_type_error': ''}`} 
+        aria-label={label} 
+        placeholder={description} 
+        minLength={minMax ? minMax[0] : undefined}
+        maxLength={minMax ? minMax[1] : undefined} 
+        value={value} 
+        onChange={handleChange}
+        autoComplete={type === 'password' ? `news-explorer ${name}` : ''}
         required />
-      <span className={`form__error${props.error ? ' form__error_active' : ''}`}>{props.error}</span>
+      <span className={`form__error${error ? ' form__error_active' : ''}`}>{error}</span>
     </>
   );
 }

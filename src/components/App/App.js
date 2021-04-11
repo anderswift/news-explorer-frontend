@@ -13,7 +13,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   // sample user information, to be replaced with info loaded from API
   const [currentUser, setCurrentUser] = useState({ _id: '3456rhwj3456aeh3', email: 'anderswift@gmail.com', username: 'Ander' });
-  const [activePopup, setActivePopup] = useState('');
+  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
   const logout = () => {
@@ -36,21 +37,31 @@ function App() {
   };
 
   const closePopups = () => {
-    setActivePopup('');
+    document.removeEventListener('keyup', closeOnEsc);
+    setIsLoginPopupOpen(false);
+    setIsRegisterPopupOpen(false);
   };
 
   const openRegisterPopup = () => {
-    setActivePopup('register');
+    document.addEventListener('keyup', closeOnEsc);
+    setIsRegisterPopupOpen(true);
   };
 
   const openLoginPopup = () => {
-    setActivePopup('login');
+    document.addEventListener('keyup', closeOnEsc);
+    setIsLoginPopupOpen(true);
   };
+
+  const closeOnEsc = (e) => { 
+    if(e.key === 'Escape') {
+      closePopups();
+    }
+  }
 
   return (
     <CurrentUserContext.Provider value={{ currentUser, isLoggedIn }}>
 
-      <div className={`container ${activePopup !== '' ? 'container_overlaid' : ''}`}>
+      <div className={`container ${isRegisterPopupOpen || isLoginPopupOpen ? 'container_overlaid' : ''}`}>
         <Switch>
 
           <Route path="/saved-news">
@@ -65,7 +76,7 @@ function App() {
       </div>
 
       <FormRegister
-        isOpen={activePopup === 'register'}
+        isOpen={isRegisterPopupOpen}
         onClose={closePopups}
         openLoginPopup={openLoginPopup}
         onSubmit={register}
@@ -73,7 +84,7 @@ function App() {
       />
 
       <FormLogin
-        isOpen={activePopup === 'login'}
+        isOpen={isLoginPopupOpen}
         onClose={closePopups}
         openRegisterPopup={openRegisterPopup}
         onSubmit={login}

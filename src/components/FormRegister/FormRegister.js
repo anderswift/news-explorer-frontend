@@ -39,6 +39,11 @@ function FormRegister({isOpen, isSaving, onClose, onSubmit, openLoginPopup}) {
     setSubmitReady(false);
   }
 
+  const switchForms = () => {
+    onClose();
+    openLoginPopup();
+  }
+
   
   return (
     <PopupWithForm heading="Sign Up" name="register" isOpen={isOpen} onClose={onClose} onReset={handleReset}
@@ -57,7 +62,7 @@ function FormRegister({isOpen, isSaving, onClose, onSubmit, openLoginPopup}) {
         name="register-submit">{isSaving ? 'Loading...' : 'Sign Up'}</button>
       
       <p className="form__alt">
-        or <button type="button" className="form__link button button_link" onClick={openLoginPopup}>Sign in</button>
+        or <button type="button" className="form__link button button_link" onClick={switchForms}>Sign in</button>
       </p>
       
     </PopupWithForm>
