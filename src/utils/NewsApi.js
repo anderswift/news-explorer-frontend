@@ -1,16 +1,16 @@
 import { NEWS_API_KEY } from './constants';
 
-class Api {
+class NewsApi {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._apiKey = NEWS_API_KEY;
     this._headers = headers;
   }
 
-  getCardsByKeyword(keyword) {
+  getCardsByKeyword(keyword, numberCards = 100) {
     const params = new URLSearchParams({
       apiKey: this._apiKey,
-      pageSize: 10,
+      pageSize: numberCards,
       q: keyword
     });
     return fetch(
@@ -23,9 +23,9 @@ class Api {
   }
 }
 
-const api = new Api({
+const newsApi = new NewsApi({
   baseUrl: 'https://nomoreparties.co/news/v2/everything',
   headers: { 'Content-Type': 'application/json' }
 });
 
-export { api as default };
+export { newsApi as default };

@@ -1,5 +1,5 @@
 import Navigation from '../Navigation/Navigation';
-import SearchForm from '../SearchForm/SearchForm.js';
+import SearchForm from '../SearchForm/SearchForm';
 
 import './Header.css';
 

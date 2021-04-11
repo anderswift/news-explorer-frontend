@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import api from '../../utils/api';
+import newsApi from '../../utils/NewsApi';
 
 import Header from '../Header/Header';
 import NewsCardList from '../NewsCardList/NewsCardList';
@@ -10,8 +10,10 @@ import Footer from '../Footer/Footer';
 
 function Main({ logout, openLoginPopup }) {
 
+  const defaultNumberCardsShown = 3;
   const [keyword, setKeyword] = useState('');
   const [cards, setCards] = useState([]);
+  const [numberCardsShown, setNumberCardsShown] = useState(defaultNumberCardsShown);
   const [isLoading, setIsLoading] = useState(false);
 
 
@@ -19,15 +21,19 @@ function Main({ logout, openLoginPopup }) {
     setKeyword(keyword);
   }
 
+  function showMoreCards() {
+    setNumberCardsShown(numberCardsShown + defaultNumberCardsShown);
+  }
+
 
   useEffect(() => {
     if(keyword !== '') {
       setIsLoading(true);
-      api.getCardsByKeyword(keyword)
+      setNumberCardsShown(defaultNumberCardsShown);
+      newsApi.getCardsByKeyword(keyword)
         .then((cards) => {
           setIsLoading(false);
-          setCards(cards); 
-          console.log(cards);
+          setCards(cards);
         })
         .catch((err) => {
           setIsLoading(false);
@@ -42,7 +48,15 @@ function Main({ logout, openLoginPopup }) {
       <Header handleSearch={searchByKeyword} logout={logout} openLoginPopup={openLoginPopup} />
       
       {(keyword || isLoading) ? 
-        <NewsCardList cards={cards} isLoading={isLoading} isSearch={true} openLoginPopup={openLoginPopup} keyword={keyword} />
+        <NewsCardList 
+          cards={cards.slice(0, numberCardsShown)} 
+          totalCards={cards.length}
+          isLoading={isLoading} 
+          isSearch={true} 
+          openLoginPopup={openLoginPopup} 
+          keyword={keyword} 
+          showMoreCards={showMoreCards}
+          />
         : 
         null
       }

@@ -8,8 +8,7 @@ import '../List/List.css';
 import './NewsCardList.css';
 
 
-function NewsCardList({ cards, isLoading, isSearch, openLoginPopup, keyword }) {
-
+function NewsCardList({ cards, totalCards, isLoading, isSearch, openLoginPopup, showMoreCards }) {
 
   return (
     <section className="news-cards">
@@ -22,7 +21,7 @@ function NewsCardList({ cards, isLoading, isSearch, openLoginPopup, keyword }) {
             <NoNewsResults />
             :
             <>
-            {isSearch ? <h3 className="news-cards__heading">Search results</h3> : null}
+              {isSearch ? <h3 className="news-cards__heading">Search results</h3> : null}
 
               <ul className="news-cards__list list">
 
@@ -31,7 +30,7 @@ function NewsCardList({ cards, isLoading, isSearch, openLoginPopup, keyword }) {
                 ))}
 
               </ul>
-              <ShowMoreButton />
+              {cards.length < totalCards ? <ShowMoreButton showMoreCards={showMoreCards} /> : null } 
             </>
 
           }
