@@ -7,9 +7,7 @@
   z-index: 99;
   visibility: hidden;
   opacity: 0;
-  transition: 
-    .35s opacity .35s ease-in-out,
-    .35s visibility .35s ease-in-out;
+  transition: .35s opacity .35s ease-in-out;
 }
 
 .popup_open {
