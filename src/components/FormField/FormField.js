@@ -4,16 +4,12 @@ import './FormField.css';
 
 function FormField({ name, label, description, type, minMax, value, error, handleChange, focusOnOpen = false }) {
 
-  const fieldRef = useRef();
+  const fieldRef = useRef(); // for focus only
 
   useEffect(() => {
-    console.log('focusOnOpen: '+focusOnOpen+', fieldRef: '+fieldRef);
-    if(focusOnOpen && fieldRef) {
-      console.log('so, should focus now?');
-      fieldRef.current.focus();
-    }
+    if(focusOnOpen && fieldRef.current) fieldRef.current.focus();
   }, [focusOnOpen, fieldRef]);
-
+  
   return (
     <>
       <label className="form__label">{label}</label>

@@ -7,12 +7,16 @@
   z-index: 99;
   visibility: hidden;
   opacity: 0;
-  transition: .35s opacity .35s ease-in-out;
+  transition: 
+    .35s opacity .35s ease-in-out,
+    .35s visibility .35s ease-in-out;
 }
 
 .popup_open {
   visibility: visible;
   opacity: 1;
+  transition: 
+    .35s opacity .35s ease-in-out;
 }
 
 .popup::before {
@@ -85,7 +89,6 @@
 .form__link {
   color: #2f71e5;
 }
-
 
 @media only screen and (min-width: 768px) {
 

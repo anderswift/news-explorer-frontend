@@ -49,7 +49,7 @@ function FormRegister({isOpen, isSaving, onClose, onSubmit, openLoginPopup}) {
     <PopupWithForm heading="Sign Up" name="register" isOpen={isOpen} onClose={onClose} onReset={handleReset}
       onSubmit={handleSubmit}>
 
-      <FormField name="register-email" minMax={[5, 320]} handleChange={handleChange} 
+      <FormField name="register-email" minMax={[5, 320]} handleChange={handleChange} focusOnOpen={isOpen} 
         value={values.email} error={errors.email} type="email" label="Email" description="Enter your email" />
 
       <FormField name="register-password" minMax={[10, 256]} handleChange={handleChange} 
