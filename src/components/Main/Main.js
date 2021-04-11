@@ -15,6 +15,7 @@ function Main({ logout, openLoginPopup }) {
   const [cards, setCards] = useState([]);
   const [numberCardsShown, setNumberCardsShown] = useState(defaultNumberCardsShown);
   const [isLoading, setIsLoading] = useState(false);
+  const [newsError, setNewsError] = useState(false);
 
 
   function searchByKeyword(keyword) {
@@ -29,6 +30,7 @@ function Main({ logout, openLoginPopup }) {
   useEffect(() => {
     if(keyword !== '') {
       setIsLoading(true);
+      setNewsError(false);
       setNumberCardsShown(defaultNumberCardsShown);
       newsApi.getCardsByKeyword(keyword)
         .then((cards) => {
@@ -37,6 +39,7 @@ function Main({ logout, openLoginPopup }) {
         })
         .catch((err) => {
           setIsLoading(false);
+          setNewsError(true);
           console.log(err);
         });
     }
@@ -53,6 +56,7 @@ function Main({ logout, openLoginPopup }) {
           totalCards={cards.length}
           isLoading={isLoading} 
           isSearch={true} 
+          newsError={newsError}
           openLoginPopup={openLoginPopup} 
           keyword={keyword} 
           showMoreCards={showMoreCards}

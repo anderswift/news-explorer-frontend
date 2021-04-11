@@ -9,6 +9,7 @@ function SavedNews({ logout, openLoginPopup }) {
 
   // temporary sample cards for testing
   const [cards, setCards] = useState([]);
+  const [newsError, setNewsError] = useState(false);
 
 
   useEffect(() => {
@@ -91,7 +92,12 @@ function SavedNews({ logout, openLoginPopup }) {
 
   return (
     <>
-      <SavedNewsHeader cardCount={cards.length} logout={logout} openLoginPopup={openLoginPopup} />
+      <SavedNewsHeader 
+        cardCount={cards.length} 
+        logout={logout} 
+        openLoginPopup={openLoginPopup} 
+        newsError={newsError}
+      />
       
       { cards.length ? <NewsCardList cards={cards} /> : null }
 

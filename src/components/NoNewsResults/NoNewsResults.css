@@ -1,6 +1,9 @@
 .no-news-results {
   margin: 18px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .no-news-results__image {
@@ -16,10 +19,22 @@
   margin: 24px 0 16px 0;
 }
 
+.no-news-results__heading_error {
+  margin: 0 0 16px 0;
+}
+
 .no-news-results__p {
   font-size: 18px;
   line-height: 24px;
   color: #b6bcbf;
   max-width: 240px;
+  margin: 0;
+}
+
+.no-news-results__p_error {
+  font-size: 18px;
+  line-height: 24px;
+  color: #b6bcbf;
+  max-width: 380px;
   margin: 0;
 }
