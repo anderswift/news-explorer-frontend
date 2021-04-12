@@ -1,7 +1,10 @@
-import { useState } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Route, Switch, useLocation } from 'react-router-dom';
 
+import api from '../../utils/MainApi.js';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import FormRegister from '../FormRegister/FormRegister';
@@ -10,27 +13,42 @@ import FormLogin from '../FormLogin/FormLogin';
 import './App.css';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  // sample user information, to be replaced with info loaded from API
-  const [currentUser, setCurrentUser] = useState({ _id: '3456rhwj3456aeh3', email: 'anderswift@gmail.com', username: 'Ander' });
+
+  const location = useLocation();
+  
+  const [token, setToken] = useState(localStorage.getItem('jwt'));
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
-  const logout = () => {
+  const handleLogout = () => {
+    localStorage.removeItem('jwt');
+    setToken('');
     setCurrentUser({});
     setIsLoggedIn(false);
   };
 
-  const login = () => {
-    // login function goes here
+  const handleLogin = (credentials) => {
     setIsSaving(true);
-    console.log('login');
-    setIsSaving(false);
+    return api.login(credentials)
+      .then((res) => {
+        login(res);
+        setIsSaving(false);
+      })
+      .catch(() => {
+        setIsSaving(false);
+      });
   };
 
+  const login = (userData) => {
+    setIsLoggedIn(true);
+    setCurrentUser(userData);
+    closePopups();
+  }
+
   const register = () => {
-    // register function goes here
     setIsSaving(true);
     console.log('register');
     setIsSaving(false);
@@ -58,18 +76,37 @@ function App() {
     }
   }
 
+
+  useEffect(() => {
+    setToken(localStorage.getItem('jwt'));
+    if (token) {
+      api.checkToken(token).then((res) => {
+        console.log(res);
+        if (res) {
+          setIsLoggedIn(true);
+          setCurrentUser(res);
+        }
+      });
+    }
+  }, [token]);
+
+
+  useEffect(() => {
+    if (!isLoggedIn && location.signin) setIsLoginPopupOpen(true);
+    else setIsLoginPopupOpen(false);
+    location.signin = false;
+  }, [location, isLoggedIn]);
+
+
   return (
     <CurrentUserContext.Provider value={{ currentUser, isLoggedIn }}>
-
       <div className={`container ${isRegisterPopupOpen || isLoginPopupOpen ? 'container_overlaid' : ''}`}>
+        
         <Switch>
-
-          <Route path="/saved-news">
-            <SavedNews logout={logout} openLoginPopup={openLoginPopup} />
-          </Route>
+          <ProtectedRoute path="/saved-news" component={SavedNews} logout={handleLogout} openLoginPopup={openLoginPopup} />
 
           <Route path="/">
-            <Main logout={logout} openLoginPopup={openLoginPopup} />
+            <Main logout={handleLogout} openLoginPopup={openLoginPopup} />
           </Route>
 
         </Switch>
@@ -87,7 +124,7 @@ function App() {
         isOpen={isLoginPopupOpen}
         onClose={closePopups}
         openRegisterPopup={openRegisterPopup}
-        onSubmit={login}
+        onSubmit={handleLogin}
         isSaving={isSaving}
       />
 

@@ -21,13 +21,13 @@ function SavedNewsIntro({ cardCount, keywords }) {
     <div className="saved-news-intro">
       <h1 className="saved-news-intro__title">Saved articles</h1>
       <h2 className="saved-news-intro__count">
-        {currentUserContext.currentUser.username}, you have {cardCount || 0} saved {cardCount === 1 ? 'article' : 'articles'}
+        {currentUserContext.currentUser.name}, you have {cardCount || 0} saved {cardCount === 1 ? 'article' : 'articles'}
       </h2>
       
-      <p className="saved-news-intro__keywords">By keywords:&nbsp;
+      <div className="saved-news-intro__keywords">By keywords:&nbsp;
         <ul className="saved-news-intro__keyword-list list">
           {displayedKeywords.map((keyword, index) => (
-            <li className="saved-news-intro__keyword-item">
+            <li className="saved-news-intro__keyword-item" key={index}>
               <button className="button button_link link saved-news-intro__keyword-button" type="button">{keyword}</button>
             </li>
           ))}
@@ -43,7 +43,8 @@ function SavedNewsIntro({ cardCount, keywords }) {
             null
           }
         </ul>
-      </p>
+      </div>
+
     </div>
   );
 }

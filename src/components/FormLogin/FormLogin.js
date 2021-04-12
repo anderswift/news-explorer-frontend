@@ -30,7 +30,11 @@ function FormLogin({isOpen, isSaving, onClose, onSubmit, openRegisterPopup}) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onSubmit(values);
+    onSubmit(values)
+    .catch(() => {
+      setValues({...values, password: '' });
+      setSubmitReady(false);
+    });
   }
 
   const handleReset = () => {
@@ -56,7 +60,7 @@ function FormLogin({isOpen, isSaving, onClose, onSubmit, openRegisterPopup}) {
         value={values.password} error={errors.password} type="password" label="Password" description="Enter password" />
 
       <button type="submit" className={`button button_submit form__submit${!submitReady ? ' button_disabled' : ''}`} 
-        name="login-submit">{isSaving ? 'Loading...' : 'Sign In'}</button>
+        name="login-submit" disabled={!submitReady}>{isSaving ? 'Loading...' : 'Sign In'}</button>
       
       <p className="form__alt">
         or <button type="button" className="form__link button button_link" onClick={switchForms}>Sign up</button>
