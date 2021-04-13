@@ -1,0 +1,35 @@
+.form__heading {
+  margin: 0 0 22px 0;
+}
+
+.form__error {
+  display: block;
+  width: 100%;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ff0000;
+  visibility: hidden;
+}
+
+.form__error_active {
+  visibility: visible;
+}
+
+.form__error_type_submission {
+  margin: -25px 0 8px 0;
+  text-align: center;
+}
+
+.form__submit {
+  width: 100% !important;
+}
+
+.form__alt {
+  text-align: center;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.form__link {
+  color: #2f71e5;
+}

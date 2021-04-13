@@ -1,0 +1,120 @@
+.popup {
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  visibility: hidden;
+  opacity: 0;
+  transition: 
+    .35s opacity .35s ease-in-out,
+    .35s visibility .35s ease-in-out;
+}
+
+.popup_open {
+  visibility: visible;
+  opacity: 1;
+  transition: 
+    .35s opacity .35s ease-in-out;
+}
+
+.popup::before {
+  content: '';
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0);
+  transition:
+    0.35s background-color .7s ease-in-out;
+}
+
+.popup_open::before {
+  background: rgba(0, 0, 0, 0.5) url(../../images/background.png) 50% 0 no-repeat;
+  transition: background-color .35s ease-in-out;
+}
+
+.popup__modal {
+  display: block;
+  background: #fff;
+  width: 100%;
+  min-height: calc(100vh - 56px); 
+  margin: 56px 0 0 0;
+  padding: 16px;
+  border-radius: 16px 16px 0 0;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.popup__exit {
+  position: absolute;
+  top: -56px;
+  right: 0;
+  height: 56px;
+  width: 56px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.popup__exit-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  pointer-events: none;
+}
+
+.popup__heading {
+  font-size: 24px;
+  line-height: 28px;
+  margin: 9px 0 14px 0;
+  font-weight: 900;
+}
+
+.popup__link {
+  color: #2f71e5;
+  font-size: 18px;
+  line-height: 22px;
+  display: inline-block;
+  margin: 0 0 10px 0;
+}
+
+
+@media only screen and (min-width: 768px) {
+
+  .popup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+  }
+
+  .popup_open::before {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .popup__modal {
+    width: 430px;
+    min-height: auto; 
+    margin: auto;
+    padding: 34px 36px;
+    border-radius: 16px;
+  }
+
+  .popup__exit {
+    width: 40px;
+    height: 40px;
+    top: -46px;
+    right: -46px;
+  }
+  .popup__exit-icon {
+    transform: scale(1.66666666666667);
+  }
+
+}

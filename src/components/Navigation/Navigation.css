@@ -1,0 +1,91 @@
+
+.navigation {
+  position: relative;
+  z-index: 2;
+  transition: background-color .35s ease-in-out;
+}
+
+.navigation__inner {
+  display: flex;
+  align-items: center;
+  height: 56px;
+}
+
+.navigation_scheme_light { color: #000; }
+
+.navigation::after { /* adds necessary background at proper z-index to allow the menu to appear to slide underneath */
+  content: '';
+  width: 100%;
+  height: 56px;
+  position: absolute;
+  top: 0; 
+  left: 0;
+  z-index: 2;
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transition: 0.35s background-color 0.35s ease-in-out;
+}
+
+.navigation_open::after {
+  background: #1a1b22;
+  transition: background-color 0.35s ease-in-out;
+}
+
+.navigation_scheme_light::after {
+  background: #fff;
+  border-bottom: 1px solid #d1d2d6;
+}
+
+.navigation::before { /* the overlay when menu is open */
+  background: rgba(0, 0, 0, 0);
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  transition: 0.35s background-color .7s ease-in-out;
+}
+
+.navigation_open::before {
+  background: rgba(0, 0, 0, 0.5);
+  visibility: visible;
+  transition: 
+    background-color .35s ease-in-out;
+}
+
+
+@media only screen and (min-width: 768px) {
+
+  .navigation { 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .navigation__inner {
+    justify-content: space-between;
+    height: 66px;
+  }
+
+  .navigation::before,
+  .navigation_open::before, 
+  .navigation::after,
+  .navigation_open::after { display: none; }
+
+  .navigation_scheme_light { border-bottom: 1px solid #d1d2d6; }
+
+  .navigation_scheme_light:hover, .navigation_scheme_light:focus-within {
+    background: none;
+    box-shadow: none;
+  }
+
+}
+
+
+@media only screen and (min-width: 1024px) {
+
+  .navigation__inner { height: 80px; }
+
+}

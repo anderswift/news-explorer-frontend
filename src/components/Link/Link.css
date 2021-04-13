@@ -1,0 +1,17 @@
+.link {
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  transition: color 0.35s ease-in-out;
+}
+
+.link:hover,
+.link:focus {
+  outline: none;
+  color: #2f71e5;
+}
+
+.link:focus-visible {
+  outline: 2px dotted #e89d22;
+  outline-offset: 4px; 
+}
