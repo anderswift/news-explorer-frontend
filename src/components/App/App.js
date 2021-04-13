@@ -9,6 +9,7 @@ import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import FormRegister from '../FormRegister/FormRegister';
 import FormLogin from '../FormLogin/FormLogin';
+import Popup from '../Popup/Popup';
 
 import './App.css';
 
@@ -19,8 +20,7 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem('jwt'));
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
-  const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
+  const [activePopup, setActivePopup] = useState('register-success');
   const [isSaving, setIsSaving] = useState(false);
 
   const handleLogout = () => {
@@ -56,18 +56,12 @@ function App() {
 
   const closePopups = () => {
     document.removeEventListener('keyup', closeOnEsc);
-    setIsLoginPopupOpen(false);
-    setIsRegisterPopupOpen(false);
+    setActivePopup('');
   };
 
-  const openRegisterPopup = () => {
-    document.addEventListener('keyup', closeOnEsc);
-    setIsRegisterPopupOpen(true);
-  };
-
-  const openLoginPopup = () => {
-    document.addEventListener('keyup', closeOnEsc);
-    setIsLoginPopupOpen(true);
+  const openPopup = (label) => {
+    if(activePopup !== '') document.addEventListener('keyup', closeOnEsc);
+    setActivePopup(label);
   };
 
   const closeOnEsc = (e) => { 
@@ -92,41 +86,48 @@ function App() {
 
 
   useEffect(() => {
-    if (!isLoggedIn && location.signin) setIsLoginPopupOpen(true);
-    else setIsLoginPopupOpen(false);
+    if (!isLoggedIn && location.signin) setActivePopup('login');
+    else setActivePopup('');
     location.signin = false;
   }, [location, isLoggedIn]);
 
 
   return (
     <CurrentUserContext.Provider value={{ currentUser, isLoggedIn }}>
-      <div className={`container ${isRegisterPopupOpen || isLoginPopupOpen ? 'container_overlaid' : ''}`}>
+      <div className={`container ${activePopup !== '' ? 'container_overlaid' : ''}`}>
         
         <Switch>
-          <ProtectedRoute path="/saved-news" component={SavedNews} logout={handleLogout} openLoginPopup={openLoginPopup} />
+          <ProtectedRoute path="/saved-news" component={SavedNews} logout={handleLogout} openLoginPopup={() => openPopup('login')} />
 
           <Route path="/">
-            <Main logout={handleLogout} openLoginPopup={openLoginPopup} />
+            <Main logout={handleLogout} openLoginPopup={() => openPopup('login')} />
           </Route>
 
         </Switch>
       </div>
 
       <FormRegister
-        isOpen={isRegisterPopupOpen}
+        isOpen={activePopup === 'register'}
         onClose={closePopups}
-        openLoginPopup={openLoginPopup}
+        openLoginPopup={() => openPopup('login')}
         onSubmit={register}
         isSaving={isSaving}
       />
 
       <FormLogin
-        isOpen={isLoginPopupOpen}
+        isOpen={activePopup === 'login'}
         onClose={closePopups}
-        openRegisterPopup={openRegisterPopup}
+        openRegisterPopup={() => openPopup('register')}
         onSubmit={handleLogin}
         isSaving={isSaving}
       />
+
+      <Popup isOpen={activePopup === 'register-success'} onClose={closePopups}>
+        <p className="popup__heading">Registration successfully completed!</p>
+        <button type="button" className="popup__link button button_link" onClick={() => openPopup('login')}>
+          Sign in
+        </button>
+      </Popup>
 
     </CurrentUserContext.Provider>
   );
