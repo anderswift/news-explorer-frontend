@@ -20,7 +20,7 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem('jwt'));
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [activePopup, setActivePopup] = useState('register-success');
+  const [activePopup, setActivePopup] = useState('');
   const [isSaving, setIsSaving] = useState(false);
 
   const handleLogout = () => {

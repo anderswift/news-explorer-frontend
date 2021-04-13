@@ -16,7 +16,7 @@
   box-shadow: 0 0 0 2px #e89d22;
 }
 
-.button_submit {
+.button_type_submit {
   line-height: 56px;
   border-radius: 28px;
   box-sizing: border-box;
@@ -27,15 +27,15 @@
   transition: background-color .35s ease-in-out;
 }
 
-.button_submit:hover,
-.button_submit:focus {
+.button_type_submit:hover,
+.button_type_submit:focus {
   background: #347eff;
   outline: none;
 }
 
 
 
-.button_submit:active { background: #2a65cc; }
+.button_type_submit:active { background: #2a65cc; }
 
 .button_disabled,
 .button_disabled:hover,
@@ -70,13 +70,13 @@
 
 @media only screen and (min-width: 768px) {
 
-  .button_submit { width: auto; }
+  .button_type_submit { width: auto; }
 
 }
 
 @media only screen and (min-width: 1024px) {
 
-  .button_submit {
+  .button_type_submit {
     line-height: 64px;
     border-radius: 32px;
   }

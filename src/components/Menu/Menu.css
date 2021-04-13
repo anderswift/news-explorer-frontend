@@ -29,7 +29,7 @@
     .35s top .35s ease-in-out;
 }
 
-.menu_saved-news.menu_open { background: #fff; }
+.menu_scheme_scheme_light.menu_open { background: #fff; }
 
 
 .menu__link {
@@ -93,8 +93,8 @@
   .menu__link:hover:after, 
   .menu__link:focus:after { border-bottom: 3px solid rgba(255, 255, 255, 0.3); }
 
-  .menu__link_saved-news:hover:after, 
-  .menu__link_saved-news:focus:after { border-bottom: 3px solid rgba(0, 0, 0, 0.2); }
+  .menu__link_scheme_light:hover:after, 
+  .menu__link_scheme_light:focus:after { border-bottom: 3px solid rgba(0, 0, 0, 0.2); }
 
   .menu__link_current:after { border-bottom: 3px solid currentColor; }
 

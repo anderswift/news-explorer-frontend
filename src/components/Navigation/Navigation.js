@@ -24,7 +24,7 @@ function Navigation({ isSavedNewsHeader = false, logout, openLoginPopup }) {
 
 
   return (
-    <nav className={`navigation${isSavedNewsHeader ? ' navigation_saved-news' : ''}${isMenuOpen ? ' navigation_open' : ''}`}>
+    <nav className={`navigation${isSavedNewsHeader ? ' navigation_scheme_light' : ''}${isMenuOpen ? ' navigation_open' : ''}`}>
 
       <Logo />
 

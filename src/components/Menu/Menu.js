@@ -14,15 +14,15 @@ function Menu({ isSavedNewsHeader = false, isMenuOpen = true, logout, openLoginP
   const currentUserContext = useContext(CurrentUserContext);
 
   return (
-    <ul className={`list menu${isMenuOpen ? ' menu_open' : ''}${isSavedNewsHeader ? ' menu_saved-news' : ''}`}>
+    <ul className={`list menu${isMenuOpen ? ' menu_open' : ''}${isSavedNewsHeader ? ' menu_scheme_light' : ''}`}>
       <li>
-        <NavLink to="/" exact={true} className={`menu__link${isSavedNewsHeader ? ' menu__link_saved-news' : ''} link`} activeClassName="menu__link_current">Home</NavLink>
+        <NavLink to="/" exact={true} className={`menu__link${isSavedNewsHeader ? ' menu__link_scheme_light' : ''} link`} activeClassName="menu__link_current">Home</NavLink>
       </li>
 
       {currentUserContext.isLoggedIn &&
         <li>
           <NavLink to="/saved-news" 
-            className={`menu__link${isSavedNewsHeader ? ' menu__link_saved-news' : ''} link`} 
+            className={`menu__link${isSavedNewsHeader ? ' menu__link_scheme_light' : ''} link`} 
             activeClassName="menu__link_current"
           >
             Saved Articles

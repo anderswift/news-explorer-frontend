@@ -18,7 +18,7 @@ function SignInOutButton({ isSavedNewsHeader, logout, openLoginPopup }) {
   return (
     currentUserContext.isLoggedIn ?
       <li>
-        <button type="button" className={`button menu__button menu__button_logged-in${isSavedNewsHeader ? ' menu__button_saved-news' : ''}`}
+        <button type="button" className={`button menu__button menu__button_logged-in${isSavedNewsHeader ? ' menu__button_scheme_light' : ''}`}
            onClick={logout} aria-label={`Logout ${currentUserContext.currentUser.name}`}>
 
           {currentUserContext.currentUser.name}
@@ -31,7 +31,7 @@ function SignInOutButton({ isSavedNewsHeader, logout, openLoginPopup }) {
       </li>
       :
       <li>
-        <button type="button" className={`button menu__button menu__button_signin${isSavedNewsHeader ? ' menu__button_saved-news' : ''}`}
+        <button type="button" className={`button menu__button menu__button_signin${isSavedNewsHeader ? ' menu__button_scheme_light' : ''}`}
           onClick={onSignInClick}>
           Sign In
         </button>

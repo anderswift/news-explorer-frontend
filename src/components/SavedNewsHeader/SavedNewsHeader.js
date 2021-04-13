@@ -10,7 +10,7 @@ function SavedNewsHeader({ cardCount, logout, openLoginPopup }) {
 
 
   return (
-    <header className="header header_saved-news">
+    <header className="header header_scheme_light">
 
       <Navigation isSavedNewsHeader={true} logout={logout} openLoginPopup={openLoginPopup} />
 

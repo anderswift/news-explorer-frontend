@@ -54,7 +54,7 @@ function FormLogin({isOpen, isSaving, onClose, onSubmit, openRegisterPopup}) {
       <FormField name="login-password" minMax={[10, 256]} handleChange={handleChange} 
         value={values.password} error={errors.password} type="password" label="Password" description="Enter password" />
 
-      <button type="submit" className={`button button_submit form__submit${!submitReady ? ' button_disabled' : ''}`} 
+      <button type="submit" className={`button button_type_submit form__submit${!submitReady ? ' button_disabled' : ''}`} 
         name="login-submit" disabled={!submitReady}>{isSaving ? 'Loading...' : 'Sign In'}</button>
       
       <p className="form__alt">

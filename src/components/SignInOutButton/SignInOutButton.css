@@ -27,17 +27,17 @@
 }
 
 
-.menu__button_saved-news { border-color: #d1d2d6; }
+.menu__button_scheme_light { border-color: #d1d2d6; }
 
-.menu__button_saved-news:hover, 
-.menu__button_saved-news:focus {
+.menu__button_scheme_light:hover, 
+.menu__button_scheme_light:focus {
   background: #fff;
   color: #000;
   border-color: #000;
 }
 
 .menu__button:focus-visible, 
-.menu__button_saved-news:focus-visible {
+.menu__button_scheme_light:focus-visible {
   border-color: #e89d22;
 }
 

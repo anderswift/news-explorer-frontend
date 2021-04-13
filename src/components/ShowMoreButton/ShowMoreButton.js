@@ -11,7 +11,7 @@ function ShowMoreButton({ showMoreCards }) {
   }
 
   return (
-    <button className="button button_submit show-more" type="button" onClick={onShowMore}>
+    <button className="button button_type_submit show-more" type="button" onClick={onShowMore}>
       Show more
     </button>
   );

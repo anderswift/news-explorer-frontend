@@ -53,7 +53,7 @@ function FormRegister({isOpen, isSaving, onClose, onSubmit, openLoginPopup}) {
       <FormField name="register-name" minMax={[2, 40]} handleChange={handleChange} 
         value={values.name} error={errors.name} label="Username" description="Enter your username" />
 
-      <button type="submit" className={`button button_submit form__submit${!submitReady ? ' button_disabled' : ''}`} 
+      <button type="submit" className={`button button_type_submit form__submit${!submitReady ? ' button_disabled' : ''}`} 
         name="register-submit" disabled={!submitReady}>{isSaving ? 'Loading...' : 'Sign Up'}</button>
       
       <p className="form__alt">

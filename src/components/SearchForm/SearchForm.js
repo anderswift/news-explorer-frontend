@@ -28,7 +28,7 @@ function SearchForm({ handleSearch }) {
       
       <fieldset className="search__bar">
         <input className="input search__field" type="text" placeholder="Enter topic" onChange={handleChange} />
-        <button className="search__button button button_submit" type="submit">Search</button>
+        <button className="search__button button button_type_submit" type="submit">Search</button>
       </fieldset>
 
     </form>

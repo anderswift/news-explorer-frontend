@@ -1,4 +1,4 @@
-.menu__toggle {
+.menu-toggle {
   width: 24px;
   height: 24px;
   padding: 0;
@@ -14,7 +14,7 @@
   z-index: 3;
 }
 
-.menu__toggle-icon {
+.menu-toggle__icon {
   width: 24px;
   height: 24px;
   display: block;
@@ -24,6 +24,6 @@
 
 @media only screen and (min-width: 768px) {
 
-  .menu__toggle { display: none; } 
+  .menu-toggle { display: none; } 
 
 }

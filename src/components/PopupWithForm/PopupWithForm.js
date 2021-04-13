@@ -17,9 +17,8 @@ function PopupWithForm({ isOpen, onClose, onSubmit, onReset, name, heading, chil
 
   return (
     <Popup isOpen={isOpen} onClose={onClose}>
-      <form ref={formRef} name={`${name}-form`} className={`popup__form form form_name_${name}`} 
-        onSubmit={onSubmit} 
-        onReset={() => setTimeout(() => { onReset && onReset(); }, 200)}>
+      <form ref={formRef} name={`${name}-form`} className="popup__form form"
+        onSubmit={onSubmit} onReset={() => setTimeout(() => { onReset && onReset(); }, 200)}>
         
         <h4 className="popup__heading form__heading">{heading}</h4>
         

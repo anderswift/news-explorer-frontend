@@ -21,7 +21,7 @@
   font-size: 18px;
 }
 
-.footer__menu-list_icon {
+.footer__menu-list_type_icon {
   flex-direction: row;
 }
 
@@ -29,7 +29,7 @@
   margin: 0 0 26px 0;
 }
 
-.footer__menu-item_icon { margin: 0 0 0 30px; }
+.footer__menu-item_type_icon { margin: 0 0 0 30px; }
 
 .footer__menu-link {
   color: #1a1b22;
@@ -56,8 +56,8 @@
   .footer__menu-list { flex-direction: row; }
 
   .footer__menu-item { margin: 0 12px; }
-  .footer__menu-item_icon { margin: 0 0 0 30px; }
-  .footer__menu-item_icon:first-child { margin: 0 0 0 20px;  }
+  .footer__menu-item_type_icon { margin: 0 0 0 30px; }
+  .footer__menu-item_type_icon:first-child { margin: 0 0 0 20px;  }
 
   .footer__copyright {
     margin: 0 auto 0 0;
@@ -76,8 +76,8 @@
   
   .footer__menu-item { margin: 0 22px; }
 
-  .footer__menu-item_icon,
-  .footer__menu-item_icon:first-child { margin: 0 0 0 30px; }
+  .footer__menu-item_type_icon,
+  .footer__menu-item_type_icon:first-child { margin: 0 0 0 30px; }
 
 }
 

@@ -9,7 +9,7 @@
   transition: background-color .35s ease-in-out;
 }
 
-.navigation_saved-news { color: #000; }
+.navigation_scheme_light { color: #000; }
 
 .navigation::after { /* adds necessary background at proper z-index to allow the menu to appear to slide underneath */
   content: '';
@@ -29,7 +29,7 @@
   transition: background-color 0.35s ease-in-out;
 }
 
-.navigation_saved-news::after {
+.navigation_scheme_light::after {
   background: #fff;
   border-bottom: 1px solid #d1d2d6;
 }
@@ -72,9 +72,9 @@
   .navigation::after,
   .navigation_open::after { display: none; }
 
-  .navigation_saved-news { border-bottom: 1px solid #d1d2d6; }
+  .navigation_scheme_light { border-bottom: 1px solid #d1d2d6; }
 
-  .navigation_saved-news:hover, .navigation_saved-news:focus-within {
+  .navigation_scheme_light:hover, .navigation_scheme_light:focus-within {
     background: none;
     box-shadow: none;
   }
