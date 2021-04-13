@@ -5,7 +5,7 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import FormField from '../FormField/FormField';
 
 
-function FormLogin({isOpen, isSaving, onClose, onSubmit, openRegisterPopup}) {
+function FormLogin({ isOpen, isSaving, onClose, onSubmit, openRegisterPopup, errorMessage, clearErrorMessage }) {
 
   const defaultValues = { email: '', password: '' };
   const [values, setValues] = useState(defaultValues);
@@ -14,6 +14,7 @@ function FormLogin({isOpen, isSaving, onClose, onSubmit, openRegisterPopup}) {
 
 
   function handleChange(e) {
+    if(errorMessage !== '') clearErrorMessage();
     const name = e.target.name.split('-').pop();
     setValues({...values, [name]: e.target.value });
     
@@ -51,12 +52,20 @@ function FormLogin({isOpen, isSaving, onClose, onSubmit, openRegisterPopup}) {
       <FormField name="login-email" minMax={[5, 320]} handleChange={handleChange} focusOnOpen={isOpen}
         value={values.email} error={errors.email} type="email" label="Email" description="Enter email" />
 
-      <FormField name="login-password" minMax={[10, 256]} handleChange={handleChange} 
+      <FormField name="login-password" handleChange={handleChange} 
         value={values.password} error={errors.password} type="password" label="Password" description="Enter password" />
+
+      {errorMessage ? 
+        <p className="form__error form__error_type_submission form__error_active">
+          {errorMessage}
+        </p> 
+        :
+        null
+      }
 
       <button type="submit" className={`button button_type_submit form__submit${!submitReady ? ' button_disabled' : ''}`} 
         name="login-submit" disabled={!submitReady}>{isSaving ? 'Loading...' : 'Sign In'}</button>
-      
+
       <p className="form__alt">
         or <button type="button" className="form__link button button_link" onClick={openRegisterPopup}>Sign up</button>
       </p>

@@ -21,6 +21,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [activePopup, setActivePopup] = useState('');
+  const [popupErrorMessage, setPopupErrorMessage] = useState('');
   const [isSaving, setIsSaving] = useState(false);
 
   const handleLogout = () => {
@@ -34,32 +35,44 @@ function App() {
     setIsSaving(true);
     return api.login(credentials)
       .then((res) => {
-        login(res);
-        setIsSaving(false);
+        updateUserStatus(res);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
+        setPopupErrorMessage(err);
+      }).finally(() => {
         setIsSaving(false);
       });
   };
 
-  const login = (userData) => {
+  const updateUserStatus = (userData) => {
     setIsLoggedIn(true);
     setCurrentUser(userData);
     closePopups();
   }
 
-  const register = () => {
+  const register = (credentials) => {
     setIsSaving(true);
-    console.log('register');
-    setIsSaving(false);
+    api.register(credentials)
+      .then((res) => {
+        openPopup('register-success')
+      })
+      .catch((err) => {
+        setPopupErrorMessage(err);
+      })
+      .finally(() => {
+        setIsSaving(false);
+      });
   };
 
   const closePopups = () => {
     document.removeEventListener('keyup', closeOnEsc);
     setActivePopup('');
+    setPopupErrorMessage('');
   };
 
   const openPopup = (label) => {
+    setPopupErrorMessage('');
     if(activePopup !== '') document.addEventListener('keyup', closeOnEsc);
     setActivePopup(label);
   };
@@ -75,11 +88,12 @@ function App() {
     setToken(localStorage.getItem('jwt'));
     if (token) {
       api.checkToken(token).then((res) => {
-        console.log(res);
         if (res) {
           setIsLoggedIn(true);
           setCurrentUser(res);
         }
+      }).catch((err) => {
+        console.log(err);
       });
     }
   }, [token]);
@@ -97,7 +111,7 @@ function App() {
       <div className={`container ${activePopup !== '' ? 'container_overlaid' : ''}`}>
         
         <Switch>
-          <ProtectedRoute path="/saved-news" component={SavedNews} logout={handleLogout} openLoginPopup={() => openPopup('login')} />
+          <ProtectedRoute path="/saved-news" isLoggedIn={isLoggedIn} component={SavedNews} logout={handleLogout} openLoginPopup={() => openPopup('login')} />
 
           <Route path="/">
             <Main logout={handleLogout} openLoginPopup={() => openPopup('login')} />
@@ -111,6 +125,8 @@ function App() {
         onClose={closePopups}
         openLoginPopup={() => openPopup('login')}
         onSubmit={register}
+        errorMessage={popupErrorMessage}
+        clearErrorMessage={() => setPopupErrorMessage('')}
         isSaving={isSaving}
       />
 
@@ -119,6 +135,8 @@ function App() {
         onClose={closePopups}
         openRegisterPopup={() => openPopup('register')}
         onSubmit={handleLogin}
+        errorMessage={popupErrorMessage}
+        clearErrorMessage={() => setPopupErrorMessage('')}
         isSaving={isSaving}
       />
 

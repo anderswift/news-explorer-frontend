@@ -1,3 +1,5 @@
+import { RESPONSE_MSG } from './constants.js';
+
 class MainApi {
 
   constructor({ baseUrl, headers }) {
@@ -29,12 +31,15 @@ class MainApi {
     })
     .then(res => {
       if (res.ok) return res.json();
-      return Promise.reject(`Error: ${res.status}`);
+      if (res.status === 401) return Promise.reject(RESPONSE_MSG.incorrectLogin);
+      if (res.status === 400) return Promise.reject(RESPONSE_MSG.registrationValidationError);
+      if (res.status === 500) return Promise.reject(RESPONSE_MSG.serverError);
+      return Promise.reject(RESPONSE_MSG.connectionFailed);
     })
     .then(data => {
       localStorage.setItem('jwt', data.token);
       return this.checkToken(data.token);
-    }); 
+    });  
   }
   
   
@@ -43,27 +48,13 @@ class MainApi {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify(credentials)
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      } 
-      return Promise.reject(`Error: ${res.status}`);
-    }).then(data => {
-      // now auto-login the user and save token
-      return fetch(this._baseUrl + 'signin', {
-        method: "POST",
-        headers: this._headers,
-        body: JSON.stringify(credentials)
-      })
-      .then(res => {
-        if (res.ok) return res.json();
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .then(res => {
-        localStorage.setItem('jwt', res.token);
-        return data; 
-        // no need to run checkToken, we already have the data returned from registering
-      })
+    })
+    .then(res => {
+      if (res.ok) return res.json();
+      if (res.status === 409) return Promise.reject(RESPONSE_MSG.accountExists);
+      if (res.status === 400) return Promise.reject(RESPONSE_MSG.registrationValidationError);
+      if (res.status === 500) return Promise.reject(RESPONSE_MSG.serverError);
+      return Promise.reject(RESPONSE_MSG.connectionFailed);
     }); 
   }
 }

@@ -27,17 +27,7 @@
   color: rgba(0, 0, 0, 0.2);
 }
 
-.form__error {
-  display: block;
-  font-size: 12px;
-  line-height: 15px;
-  color: #ff0000;
-  width: 100%;
+.form__error_type_field {
   margin: 4px 0 6px 0;
-  visibility: hidden;
   min-height: 32px;
-}
-
-.form__error_active {
-  visibility: visible;
 }

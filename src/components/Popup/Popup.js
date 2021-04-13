@@ -9,7 +9,6 @@ function Popup({ isOpen, onClose, children }) {
 
   const closeOnClickAway = (e) => { 
     if (!modalRef.current.contains(e.target)) onClose();
-    console.log('close modal');
   }
 
   return (

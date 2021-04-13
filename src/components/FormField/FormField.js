@@ -27,7 +27,7 @@ function FormField({ name, label, description, type, minMax, value, error, handl
         autoComplete={type === 'password' ? `news-explorer ${name}` : ''}
         ref={fieldRef}
         required />
-      <span className={`form__error${error ? ' form__error_active' : ''}`}>{error}</span>
+      <span className={`form__error form__error_type_field${error ? ' form__error_active' : ''}`}>{error}</span>
     </>
   );
 }

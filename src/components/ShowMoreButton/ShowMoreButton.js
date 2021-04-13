@@ -7,7 +7,6 @@ function ShowMoreButton({ showMoreCards }) {
   const onShowMore = (e) => {
     showMoreCards();
     e.target.blur();
-    console.log(document.activeElement);
   }
 
   return (

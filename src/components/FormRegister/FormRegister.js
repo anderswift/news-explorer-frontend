@@ -5,7 +5,7 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import FormField from '../FormField/FormField';
 
 
-function FormRegister({isOpen, isSaving, onClose, onSubmit, openLoginPopup}) {
+function FormRegister({ isOpen, isSaving, onClose, onSubmit, openLoginPopup, errorMessage, clearErrorMessage }) {
   
   const defaultValues = { email: '', name: '', password: '' };
   const [values, setValues] = useState(defaultValues);
@@ -14,6 +14,7 @@ function FormRegister({isOpen, isSaving, onClose, onSubmit, openLoginPopup}) {
 
 
   function handleChange(e) {
+    if(errorMessage !== '') clearErrorMessage();
     const name = e.target.name.split('-').pop();
     setValues({...values, [name]: e.target.value });
     
@@ -38,7 +39,7 @@ function FormRegister({isOpen, isSaving, onClose, onSubmit, openLoginPopup}) {
     setErrors({});
     setSubmitReady(false);
   }
-
+  
   
   return (
     <PopupWithForm heading="Sign Up" name="register" isOpen={isOpen} onClose={onClose} onReset={handleReset}
@@ -52,6 +53,14 @@ function FormRegister({isOpen, isSaving, onClose, onSubmit, openLoginPopup}) {
 
       <FormField name="register-name" minMax={[2, 40]} handleChange={handleChange} 
         value={values.name} error={errors.name} label="Username" description="Enter your username" />
+
+      {errorMessage ? 
+        <p className="form__error form__error_type_submission form__error_active">
+          {errorMessage}
+        </p> 
+        :
+        null
+      }
 
       <button type="submit" className={`button button_type_submit form__submit${!submitReady ? ' button_disabled' : ''}`} 
         name="register-submit" disabled={!submitReady}>{isSaving ? 'Loading...' : 'Sign Up'}</button>
