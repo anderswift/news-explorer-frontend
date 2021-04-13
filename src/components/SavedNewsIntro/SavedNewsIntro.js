@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext'; 
 
+import '../PageSection/PageSection.css';
 import '../List/List.css';
 import '../Button/Button.css';
 import '../Link/Link.css';
@@ -18,7 +19,7 @@ function SavedNewsIntro({ cardCount, keywords }) {
   }
 
   return (
-    <div className="saved-news-intro">
+    <div className="saved-news-intro page-section">
       <h1 className="saved-news-intro__title">Saved articles</h1>
       <h2 className="saved-news-intro__count">
         {currentUserContext.currentUser.name}, you have {cardCount || 0} saved {cardCount === 1 ? 'article' : 'articles'}

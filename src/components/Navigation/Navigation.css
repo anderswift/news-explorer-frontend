@@ -1,12 +1,14 @@
 
 .navigation {
-  display: flex;
-  align-items: center;
   position: relative;
   z-index: 2;
-  height: 56px;
-  padding: 0 16px;
   transition: background-color .35s ease-in-out;
+}
+
+.navigation__inner {
+  display: flex;
+  align-items: center;
+  height: 56px;
 }
 
 .navigation_scheme_light { color: #000; }
@@ -59,12 +61,12 @@
 @media only screen and (min-width: 768px) {
 
   .navigation { 
-    display: flex;
-    align-items: center; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .navigation__inner {
     justify-content: space-between;
     height: 66px;
-    padding: 0 40px; 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   .navigation::before,
@@ -84,19 +86,6 @@
 
 @media only screen and (min-width: 1024px) {
 
-  .navigation { height: 80px; }
-
-}
-
-
-@media only screen and (min-width: 1200px) {
-
-  .navigation { padding: 0 80px; }
-
-}
-
-@media only screen and (min-width: 1350px) {
-
-  .navigation { padding: 0 104px; }
+  .navigation__inner { height: 80px; }
 
 }

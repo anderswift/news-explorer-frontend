@@ -29,13 +29,14 @@
     .35s top .35s ease-in-out;
 }
 
-.menu_scheme_scheme_light.menu_open { background: #fff; }
+.menu_scheme_light.menu_open { background: #fff; }
 
 
 .menu__link {
   display: block;
   align-items: center;
   color: currentColor;
+  position: relative;
   font-size: 18px;
   line-height: 24px;
   font-weight: 500;
@@ -69,6 +70,7 @@
     transition: none;
     opacity: 1;
     visibility: visible;
+    z-index: 1;
   }
 
   .menu__link { 

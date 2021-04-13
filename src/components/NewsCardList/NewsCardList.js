@@ -3,10 +3,9 @@ import NoNewsResults from '../NoNewsResults/NoNewsResults';
 import Card from '../Card/Card';
 import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
 
-
+import '../PageSection/PageSection.css';
 import '../List/List.css';
 import './NewsCardList.css';
-
 
 function NewsCardList({ cards, totalCards, isLoading, isSearch, openLoginPopup, showMoreCards, newsError }) {
 
@@ -20,9 +19,9 @@ function NewsCardList({ cards, totalCards, isLoading, isSearch, openLoginPopup, 
             <NoNewsResults isError={newsError} />
             :
             <>
-              {isSearch ? <h3 className="news-cards__heading">Search results</h3> : null}
+              {isSearch ? <h3 className="news-cards__heading page-section">Search results</h3> : null}
 
-              <ul className="news-cards__list list">
+              <ul className="news-cards__list list page-section">
 
                 {cards.map((card, index) => (
                   <Card card={card} key={index} isSavedNews={!isSearch} openLoginPopup={openLoginPopup} />

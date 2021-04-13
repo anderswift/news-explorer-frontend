@@ -1,9 +1,10 @@
+import '../PageSection/PageSection.css';
 import './AboutAuthor.css';
 import authorPhoto from '../../images/author.png';
 
 function AboutAuthor() {
   return (
-    <article className="about-author">
+    <article className="about-author page-section">
       <img src={authorPhoto} alt="Ander Swift" className="about-author__img" width="464" height="464" />
       <div className="about-author__content">
         <h4 className="about-author__heading">About the author</h4>

@@ -3,13 +3,14 @@ import { NavLink } from 'react-router-dom';
 import githubIcon from '../../images/github.svg';
 import facebookIcon from '../../images/facebook.svg';
 
+import '../PageSection/PageSection.css';
 import '../Link/Link.css';
 import '../List/List.css';
 import './Footer.css';
 
 function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer page-section">
       
       <ul className="footer__menu-list list">
 

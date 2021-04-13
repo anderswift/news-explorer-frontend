@@ -1,6 +1,6 @@
 .news-cards {
   background: #f5f6f7;
-  padding: 24px 16px;
+  padding: 24px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -38,7 +38,7 @@
 
 @media only screen and (min-width: 768px) {
   
-  .news-cards { padding: 32px 40px; }
+  .news-cards { padding: 32px 0; }
 
   .news-cards__heading { margin: 8px 0 32px 0; }
 
@@ -65,7 +65,7 @@
 
 @media only screen and (min-width: 1200px) {
 
-  .news-cards { padding: 62px 80px; }
+  .news-cards { padding: 62px 0; }
 
   .news-cards__heading { margin: 18px 0 64px 0; }
 
@@ -74,6 +74,6 @@
 
 @media only screen and (min-width: 1350px) {
 
-  .news-cards { padding: 62px 102px; }
+  .news-cards { padding: 62px 0; }
   
 }
