@@ -8,11 +8,19 @@ class NewsApi {
   }
 
   getCardsByKeyword(keyword, numberCards = 100) {
+    const today = new Date();
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(new Date().getDate() - 7);
+
     const params = new URLSearchParams({
       apiKey: this._apiKey,
       pageSize: numberCards,
+      sortBy: 'relevancy',
+      from: oneWeekAgo.toISOString(),
+      to: today.toISOString(),
       q: keyword
     });
+    
     return fetch(
       `${this._baseUrl}?${params}`,
       { headers: this._headers }
