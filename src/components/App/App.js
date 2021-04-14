@@ -18,6 +18,7 @@ function App() {
   const location = useLocation();
   
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [tokenChecked, setTokenChecked] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [savedCards, setSavedCards] = useState([]);
   const [activePopup, setActivePopup] = useState('');
@@ -106,7 +107,6 @@ function App() {
   }
 
 
-
   useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (token) {
@@ -114,8 +114,10 @@ function App() {
         if (res) updateUserStatus(res);
       }).catch((err) => {
         console.log(err);
+      }).finally(() => {
+        setTokenChecked(true);
       });
-    }
+    } else setTokenChecked(true);
   }, []);
 
 
@@ -135,6 +137,7 @@ function App() {
           <ProtectedRoute 
             path="/saved-news" 
             isLoggedIn={isLoggedIn} 
+            tokenChecked={tokenChecked}
             component={SavedNews} 
             logout={logout} 
             openLoginPopup={() => openPopup('login')}
