@@ -1,29 +1,64 @@
 import { useState, useContext } from 'react';
 
+import api from '../../utils/MainApi.js';
 import CurrentUserContext from '../../contexts/CurrentUserContext'; 
-
 
 import '../Button/Button.css';
 import './CardButton.css';
 
-function CardButton({ icon, openLoginPopup }) {
+function CardButton({ icon, openLoginPopup, updateSavedCards, deleteCard, card, keyword }) {
 
   const currentUserContext = useContext(CurrentUserContext);
-
   const [isSaved, setIsSaved] = useState(false);
 
 
-  const handleSave = (e) => {
+  const handleClick = (e) => {
     e.preventDefault();
-    if(!currentUserContext.isLoggedIn) openLoginPopup();
-    else setIsSaved(!isSaved);
-    e.target.blur();
+
+    // if user is not logged in, open log in form
+    if(!currentUserContext.isLoggedIn) {
+      openLoginPopup();
+
+    } else {
+
+      // if the article hasn't been saved
+      if(icon === 'delete') {
+        deleteCard(card._id);
+
+      } else {
+        const cardData = (({
+          title,
+          description,
+          publishedAt,
+          source,
+          url,
+          urlToImage
+        }) => ({
+          title,
+          description,
+          publishedAt,
+          source: source.name,
+          url,
+          urlToImage}))(card);
+        cardData.keyword = keyword;
+        api.saveNewsCard(cardData)
+        .then((newCard) => {
+          updateSavedCards(newCard);
+          setIsSaved(true);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }
+    }
   }
 
   return (
-      <button type="button" aria-label="Save Article" 
+      <button 
+        type="button" 
+        aria-label={icon === 'save' && isSaved ? 'Save Article' : 'Remove from Saved Articles'} 
         className={`button card__button card__button_${icon}${!currentUserContext.isLoggedIn ? ' card__button_logged-out' : ''}`} 
-        onClick={handleSave}>
+        onClick={handleClick}>
 
         <svg className={`button__icon card__button-icon card__button-icon_${icon}${isSaved ? ' card__button-icon_saved' : ''}`} 
           width="24" height="24" viewBox="0 0 24 24">

@@ -7,7 +7,18 @@ import '../PageSection/PageSection.css';
 import '../List/List.css';
 import './NewsCardList.css';
 
-function NewsCardList({ cards, totalCards, isLoading, isSearch, openLoginPopup, showMoreCards, newsError }) {
+function NewsCardList({ 
+  cards, 
+  totalCards, 
+  isLoading, 
+  isSearch, 
+  keyword, 
+  openLoginPopup, 
+  showMoreCards, 
+  newsError, 
+  updateSavedCards,
+  deleteCard
+}) {
 
   return (
     <section className="news-cards">
@@ -23,8 +34,16 @@ function NewsCardList({ cards, totalCards, isLoading, isSearch, openLoginPopup, 
 
               <ul className="news-cards__list list page-section">
 
-                {cards.map((card, index) => (
-                  <Card card={card} key={index} isSavedNews={!isSearch} openLoginPopup={openLoginPopup} />
+                {cards.map((card) => (
+                  <Card 
+                    card={card} 
+                    key={card._id || card.url} 
+                    isSavedNews={!isSearch} 
+                    keyword={keyword} 
+                    openLoginPopup={openLoginPopup} 
+                    updateSavedCards={updateSavedCards}
+                    deleteCard={deleteCard}
+                  />
                 ))}
 
               </ul>

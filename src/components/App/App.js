@@ -17,39 +17,13 @@ function App() {
 
   const location = useLocation();
   
-  const [token, setToken] = useState(localStorage.getItem('jwt'));
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [savedCards, setSavedCards] = useState([]);
   const [activePopup, setActivePopup] = useState('');
   const [popupErrorMessage, setPopupErrorMessage] = useState('');
   const [isSaving, setIsSaving] = useState(false);
 
-  const handleLogout = () => {
-    localStorage.removeItem('jwt');
-    setToken('');
-    setCurrentUser({});
-    setIsLoggedIn(false);
-  };
-
-  const handleLogin = (credentials) => {
-    setIsSaving(true);
-    return api.login(credentials)
-      .then((res) => {
-        updateUserStatus(res);
-      })
-      .catch((err) => {
-        console.log(err);
-        setPopupErrorMessage(err);
-      }).finally(() => {
-        setIsSaving(false);
-      });
-  };
-
-  const updateUserStatus = (userData) => {
-    setIsLoggedIn(true);
-    setCurrentUser(userData);
-    closePopups();
-  }
 
   const register = (credentials) => {
     setIsSaving(true);
@@ -63,6 +37,38 @@ function App() {
       .finally(() => {
         setIsSaving(false);
       });
+  };
+
+  const login = (credentials) => {
+    setIsSaving(true);
+    return api.login(credentials)
+      .then((res) => {
+        updateUserStatus(res);
+        closePopups();
+      })
+      .catch((err) => {
+        setPopupErrorMessage(err);
+      }).finally(() => {
+        setIsSaving(false);
+      });
+  };
+
+  const updateUserStatus = (userData) => {
+    setIsLoggedIn(true);
+    setCurrentUser(userData);
+    api.getSavedNews()
+    .then((res) => {
+      if (res) setSavedCards(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
+  const logout = () => {
+    localStorage.removeItem('jwt');
+    setCurrentUser({});
+    setIsLoggedIn(false);
   };
 
   const closePopups = () => {
@@ -83,20 +89,34 @@ function App() {
     }
   }
 
+  const updateSavedCards = (newCard) => {
+    setSavedCards([newCard, ...savedCards]);
+  }
+
+  const deleteCard = (cardId) => {
+    api.deleteNewsCard(cardId)
+    .then((res) => {
+      const newCards = savedCards.filter((card) => card._id !== cardId);  
+      setSavedCards(newCards);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+    
+  }
+
+
 
   useEffect(() => {
-    setToken(localStorage.getItem('jwt'));
+    const token = localStorage.getItem('jwt');
     if (token) {
       api.checkToken(token).then((res) => {
-        if (res) {
-          setIsLoggedIn(true);
-          setCurrentUser(res);
-        }
+        if (res) updateUserStatus(res);
       }).catch((err) => {
         console.log(err);
       });
     }
-  }, [token]);
+  }, []);
 
 
   useEffect(() => {
@@ -107,14 +127,28 @@ function App() {
 
 
   return (
-    <CurrentUserContext.Provider value={{ currentUser, isLoggedIn }}>
+    <CurrentUserContext.Provider value={{ currentUser, isLoggedIn, savedCards }}>
       <div className={`container ${activePopup !== '' ? 'container_overlaid' : ''}`}>
         
         <Switch>
-          <ProtectedRoute path="/saved-news" isLoggedIn={isLoggedIn} component={SavedNews} logout={handleLogout} openLoginPopup={() => openPopup('login')} />
+
+          <ProtectedRoute 
+            path="/saved-news" 
+            isLoggedIn={isLoggedIn} 
+            component={SavedNews} 
+            logout={logout} 
+            openLoginPopup={() => openPopup('login')}
+            updateSavedCards={updateSavedCards}
+            deleteCard={deleteCard}
+          />
 
           <Route path="/">
-            <Main logout={handleLogout} openLoginPopup={() => openPopup('login')} />
+            <Main 
+              logout={logout} 
+              openLoginPopup={() => openPopup('login')} 
+              updateSavedCards={updateSavedCards} 
+              deleteCard={deleteCard} 
+            />
           </Route>
 
         </Switch>
@@ -134,7 +168,7 @@ function App() {
         isOpen={activePopup === 'login'}
         onClose={closePopups}
         openRegisterPopup={() => openPopup('register')}
-        onSubmit={handleLogin}
+        onSubmit={login}
         errorMessage={popupErrorMessage}
         clearErrorMessage={() => setPopupErrorMessage('')}
         isSaving={isSaving}

@@ -8,7 +8,7 @@ import AboutAuthor from '../AboutAuthor/AboutAuthor';
 import Footer from '../Footer/Footer';
 
 
-function Main({ logout, openLoginPopup }) {
+function Main({ logout, openLoginPopup, deleteCard, updateSavedCards }) {
 
   const defaultNumberCardsShown = 3;
   const [keyword, setKeyword] = useState('');
@@ -18,11 +18,7 @@ function Main({ logout, openLoginPopup }) {
   const [newsError, setNewsError] = useState(false);
 
 
-  function searchByKeyword(keyword) {
-    setKeyword(keyword);
-  }
-
-  function showMoreCards() {
+  const showMoreCards = () => {
     setNumberCardsShown(numberCardsShown + defaultNumberCardsShown);
   }
 
@@ -48,7 +44,7 @@ function Main({ logout, openLoginPopup }) {
 
   return (
     <>
-      <Header handleSearch={searchByKeyword} logout={logout} openLoginPopup={openLoginPopup} />
+      <Header handleSearch={setKeyword} logout={logout} openLoginPopup={openLoginPopup} />
       
       {(keyword || isLoading) ? 
         <NewsCardList 
@@ -60,7 +56,9 @@ function Main({ logout, openLoginPopup }) {
           openLoginPopup={openLoginPopup} 
           keyword={keyword} 
           showMoreCards={showMoreCards}
-          />
+          deleteCard={deleteCard}
+          updateSavedCards={updateSavedCards}
+        />
         : 
         null
       }
