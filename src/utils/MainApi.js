@@ -42,7 +42,6 @@ class MainApi {
     });  
   }
   
-  
   register(credentials) {
     return fetch(this._baseUrl + 'signup', {
       method: "POST",
@@ -57,7 +56,50 @@ class MainApi {
       return Promise.reject(RESPONSE_MSG.connectionFailed);
     }); 
   }
+
+  getSavedNews() {
+    return fetch(this._baseUrl + 'articles', {
+      method: "GET",
+      headers: this._headers
+    })
+    .then(res => {
+      if (res.ok) return res.json();
+      //if (res.status === 409) return Promise.reject(RESPONSE_MSG.accountExists);
+      //if (res.status === 400) return Promise.reject(RESPONSE_MSG.registrationValidationError);
+      if (res.status === 500) return Promise.reject(RESPONSE_MSG.serverError);
+      return Promise.reject(RESPONSE_MSG.connectionFailed);
+    }); 
+  }
+
+  saveNewsCard(cardData) {
+    return fetch(this._baseUrl + 'articles', {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify(cardData)
+    })
+    .then(res => {
+      if (res.ok) return res.json();
+      if (res.status) return Promise.reject(RESPONSE_MSG.serverError);
+      return Promise.reject(RESPONSE_MSG.connectionFailed);
+    }); 
+  }
+
+  deleteNewsCard(cardId) {
+    return fetch(this._baseUrl + 'articles/' + cardId, {
+      method: "DELETE",
+      headers: this._headers
+    })
+    .then(res => {
+      if (res.ok) return res.json();
+      if (res.status) return Promise.reject(RESPONSE_MSG.serverError);
+      return Promise.reject(RESPONSE_MSG.connectionFailed);
+    }); 
+  }
+
 }
+
+
+
 
 const api = new MainApi({
   baseUrl: "http://localhost:3001/",
