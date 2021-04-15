@@ -9,7 +9,15 @@ import AboutAuthor from '../AboutAuthor/AboutAuthor';
 import Footer from '../Footer/Footer';
 
 
-function Main({ logout, openLoginPopup, deleteCard, updateSavedCards, numberCardsShown, showMoreCards, resetCardsShown }) {
+function Main({ 
+  logout,
+  openLoginPopup,
+  deleteCard,
+  updateSavedCards,
+  numberCardsShown,
+  showMoreCards,
+  resetCardsShown
+}) {
 
   const currentUserContext = useContext(CurrentUserContext);
   const [newKeyword, setNewKeyword] = useState('');
@@ -28,7 +36,6 @@ function Main({ logout, openLoginPopup, deleteCard, updateSavedCards, numberCard
   useEffect(() => {
     // if a keyword has been set for a new search, retrieve articles with NewsApi
     if(newKeyword !== '') {
-      console.log('new search');
       setIsLoading(true);
       localStorage.removeItem('search');
       setNewsError(false);
@@ -50,7 +57,6 @@ function Main({ logout, openLoginPopup, deleteCard, updateSavedCards, numberCard
   useEffect(() => {
     // if a new keyword has not been set and user is logged in, check for saved search date
     if(newKeyword === '' && currentUserContext.isLoggedIn) {
-      console.log('retrieve saved search');
       const savedSearch = localStorage.getItem('search');
       if(savedSearch) {
         const searchCards = JSON.parse(localStorage.getItem('searchCards'));

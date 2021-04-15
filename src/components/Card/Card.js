@@ -1,15 +1,17 @@
-import CardButton from '../CardButton/CardButton';
+import CardButtons from '../CardButtons/CardButtons';
 
 import '../Link/Link.css';
 import '../Button/Button.css';
 import './Card.css';
+
 
 function Card({ card, isSavedNews, openLoginPopup, updateSavedCards, deleteCard, keyword = '' }) {
 
   const date = new Date(card.publishedAt);
   const formattedDate = `${date.toLocaleString('en-us', { month: 'long' })} ${date.getDate()}, ${date.getFullYear()}`;
 
-  function truncate(text, limit) {
+
+  const truncate = (text, limit)=> {
     if (!text) return '';
     if (text.length < limit) return text;
 
@@ -20,6 +22,7 @@ function Card({ card, isSavedNews, openLoginPopup, updateSavedCards, deleteCard,
     if (!punctuation.includes(truncated[truncated.length - 1])) return `${truncated}...`;
     return `${truncated.substring(0, truncated.length - 1)}...`;
   }
+
 
   return (
     
@@ -36,25 +39,15 @@ function Card({ card, isSavedNews, openLoginPopup, updateSavedCards, deleteCard,
           <footer className="card__source">{card.source.name || card.source}</footer>
         </article>
       </a>
-      {isSavedNews
-        ? (
-          <>
-            <button type="button" className="card__button_keyword card__button button" aria-label={`Filter by keyword: ${card.keyword}`}>
-              {card.keyword}
-            </button>
-            <CardButton icon="delete" card={card} deleteCard={deleteCard} />
-          </>
-        )
-        : 
-        <CardButton 
-          icon="save" 
-          card={card} 
-          keyword={keyword}
-          openLoginPopup={openLoginPopup} 
-          deleteCard={deleteCard} 
-          updateSavedCards={updateSavedCards} 
-        />
-      }
+
+      <CardButtons 
+        card={card} 
+        keyword={keyword}
+        isSavedNews={isSavedNews} 
+        openLoginPopup={openLoginPopup} 
+        updateSavedCards={updateSavedCards} 
+        deleteCard={deleteCard} 
+      />
     </li>
     
   );

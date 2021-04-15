@@ -27,6 +27,7 @@ function App() {
   const [isSaving, setIsSaving] = useState(false);
 
   const [savedCards, setSavedCards] = useState([]);
+  const [savedCardIdentifiers, setSavedCardIdentifiers] = useState([]);
   
   const defaultNumberCardsShown = 3;
   const [numberCardsShown, setNumberCardsShown] = useState(defaultNumberCardsShown);
@@ -141,9 +142,20 @@ function App() {
     location.signin = false;
   }, [location, isLoggedIn]);
 
+  useEffect(() => {
+    if (Array.isArray(savedCards)) {
+      setSavedCardIdentifiers(
+        savedCards.reduce((result, { _id, url, publishedAt }) => {
+          result[url + publishedAt] = _id;
+          return result;
+        }, {})
+      );
+    }
+  }, [savedCards]);
+
 
   return (
-    <CurrentUserContext.Provider value={{ currentUser, isLoggedIn, savedCards }}>
+    <CurrentUserContext.Provider value={{ currentUser, isLoggedIn, savedCards, savedCardIdentifiers }}>
       <div className={`container ${activePopup !== '' ? 'container_overlaid' : ''}`}>
         
         <Switch>

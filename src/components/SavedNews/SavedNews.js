@@ -11,10 +11,6 @@ function SavedNews({ logout, openLoginPopup, deleteCard, updateSavedCards }) {
 
   const currentUserContext = useContext(CurrentUserContext);
   const [newsError, setNewsError] = useState(false);
-
-  useEffect(() => {
-    
-  }, []);
   
 
   return (
