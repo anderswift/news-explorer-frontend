@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import newsApi from '../../utils/NewsApi';
+import CurrentUserContext from '../../contexts/CurrentUserContext'; 
 
 import Header from '../Header/Header';
 import NewsCardList from '../NewsCardList/NewsCardList';
@@ -8,30 +9,35 @@ import AboutAuthor from '../AboutAuthor/AboutAuthor';
 import Footer from '../Footer/Footer';
 
 
-function Main({ logout, openLoginPopup, deleteCard, updateSavedCards }) {
+function Main({ logout, openLoginPopup, deleteCard, updateSavedCards, numberCardsShown, showMoreCards, resetCardsShown }) {
 
-  const defaultNumberCardsShown = 3;
-  const [keyword, setKeyword] = useState('');
+  const currentUserContext = useContext(CurrentUserContext);
+  const [newKeyword, setNewKeyword] = useState('');
+  const [savedKeyword, setSavedKeyword] = useState('');
   const [cards, setCards] = useState([]);
-  const [numberCardsShown, setNumberCardsShown] = useState(defaultNumberCardsShown);
   const [isLoading, setIsLoading] = useState(false);
   const [newsError, setNewsError] = useState(false);
 
 
-  const showMoreCards = () => {
-    setNumberCardsShown(numberCardsShown + defaultNumberCardsShown);
+  const handleSearch = (keyword) => {
+    resetCardsShown();
+    setNewKeyword(keyword);
   }
 
 
   useEffect(() => {
-    if(keyword !== '') {
+    // if a keyword has been set for a new search, retrieve articles with NewsApi
+    if(newKeyword !== '') {
+      console.log('new search');
       setIsLoading(true);
+      localStorage.removeItem('search');
       setNewsError(false);
-      setNumberCardsShown(defaultNumberCardsShown);
-      newsApi.getCardsByKeyword(keyword)
+      newsApi.getCardsByKeyword(newKeyword)
         .then((cards) => {
           setIsLoading(false);
           setCards(cards);
+          localStorage.setItem('search', newKeyword);
+          localStorage.setItem('searchCards', JSON.stringify(cards));
         })
         .catch((err) => {
           setIsLoading(false);
@@ -39,14 +45,29 @@ function Main({ logout, openLoginPopup, deleteCard, updateSavedCards }) {
           console.log(err);
         });
     }
-  }, [keyword]);
+  }, [newKeyword]);
+
+  useEffect(() => {
+    // if a new keyword has not been set and user is logged in, check for saved search date
+    if(newKeyword === '' && currentUserContext.isLoggedIn) {
+      console.log('retrieve saved search');
+      const savedSearch = localStorage.getItem('search');
+      if(savedSearch) {
+        const searchCards = JSON.parse(localStorage.getItem('searchCards'));
+        if(searchCards && Array.isArray(searchCards)) {
+          setSavedKeyword(savedSearch);
+          setCards(searchCards);
+        }
+      }
+    }
+  }, [newKeyword, currentUserContext.isLoggedIn]);
 
 
   return (
     <>
-      <Header handleSearch={setKeyword} logout={logout} openLoginPopup={openLoginPopup} />
+      <Header handleSearch={handleSearch} logout={logout} openLoginPopup={openLoginPopup} />
       
-      {(keyword || isLoading) ? 
+      {(newKeyword || savedKeyword || isLoading) ? 
         <NewsCardList 
           cards={cards.slice(0, numberCardsShown)} 
           totalCards={cards.length}
@@ -54,7 +75,7 @@ function Main({ logout, openLoginPopup, deleteCard, updateSavedCards }) {
           isSearch={true} 
           newsError={newsError}
           openLoginPopup={openLoginPopup} 
-          keyword={keyword} 
+          keyword={newKeyword || savedKeyword} 
           showMoreCards={showMoreCards}
           deleteCard={deleteCard}
           updateSavedCards={updateSavedCards}

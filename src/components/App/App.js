@@ -13,6 +13,7 @@ import Popup from '../Popup/Popup';
 
 import './App.css';
 
+
 function App() {
 
   const location = useLocation();
@@ -20,10 +21,15 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [tokenChecked, setTokenChecked] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [savedCards, setSavedCards] = useState([]);
+
   const [activePopup, setActivePopup] = useState('');
   const [popupErrorMessage, setPopupErrorMessage] = useState('');
   const [isSaving, setIsSaving] = useState(false);
+
+  const [savedCards, setSavedCards] = useState([]);
+  
+  const defaultNumberCardsShown = 3;
+  const [numberCardsShown, setNumberCardsShown] = useState(defaultNumberCardsShown);
 
 
   const register = (credentials) => {
@@ -68,6 +74,8 @@ function App() {
 
   const logout = () => {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('search');
+    localStorage.removeItem('searchCards');
     setCurrentUser({});
     setIsLoggedIn(false);
   };
@@ -102,8 +110,15 @@ function App() {
     })
     .catch((err) => {
       console.log(err);
-    });
-    
+    }); 
+  }
+
+  const showMoreCards = () => {
+    setNumberCardsShown(numberCardsShown + defaultNumberCardsShown);
+  }
+
+  const resetCardsShown = () => {
+    setNumberCardsShown(defaultNumberCardsShown);
   }
 
 
@@ -119,7 +134,6 @@ function App() {
       });
     } else setTokenChecked(true);
   }, []);
-
 
   useEffect(() => {
     if (!isLoggedIn && location.signin) setActivePopup('login');
@@ -151,6 +165,9 @@ function App() {
               openLoginPopup={() => openPopup('login')} 
               updateSavedCards={updateSavedCards} 
               deleteCard={deleteCard} 
+              numberCardsShown={numberCardsShown}
+              showMoreCards={showMoreCards}
+              resetCardsShown={resetCardsShown}
             />
           </Route>
 

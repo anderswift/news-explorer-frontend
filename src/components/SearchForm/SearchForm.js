@@ -6,7 +6,7 @@ import './SearchForm.css';
 
 function SearchForm({ handleSearch }) {
 
-  const [keyword, setKeyword]= useState('');
+  const [keyword, setKeyword]= useState(localStorage.getItem('search'));
 
 
   function handleSubmit(e) {
@@ -27,7 +27,8 @@ function SearchForm({ handleSearch }) {
       <p className="search__desc">Find the latest news on any topic and save articles in your personal account.</p>
       
       <fieldset className="search__bar">
-        <input className="input search__field" type="text" placeholder="Enter topic" onChange={handleChange} />
+        <input className="input search__field" type="text" placeholder="Enter topic" 
+          onChange={handleChange} value={keyword ? keyword : ''} />
         <button className="search__button button button_type_submit" type="submit">Search</button>
       </fieldset>
 

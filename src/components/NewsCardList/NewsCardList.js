@@ -7,6 +7,7 @@ import '../PageSection/PageSection.css';
 import '../List/List.css';
 import './NewsCardList.css';
 
+
 function NewsCardList({ 
   cards, 
   totalCards, 
