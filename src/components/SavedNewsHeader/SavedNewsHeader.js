@@ -1,8 +1,8 @@
 import Navigation from '../Navigation/Navigation';
 import SavedNewsIntro from '../SavedNewsIntro/SavedNewsIntro';
 
-
 import './SavedNewsHeader.css';
+
 
 function SavedNewsHeader({ logout, openLoginPopup }) {
 

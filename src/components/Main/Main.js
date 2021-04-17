@@ -14,74 +14,30 @@ function Main({
   openLoginPopup,
   deleteCard,
   updateSavedCards,
+  keyword,
+  setKeyword,
+  isLoading,
+  newsError,
   numberCardsShown,
-  showMoreCards,
-  resetCardsShown
+  showMoreCards
 }) {
 
   const currentUserContext = useContext(CurrentUserContext);
-  const [newKeyword, setNewKeyword] = useState('');
-  const [savedKeyword, setSavedKeyword] = useState('');
-  const [cards, setCards] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [newsError, setNewsError] = useState(false);
-
-
-  const handleSearch = (keyword) => {
-    resetCardsShown();
-    setNewKeyword(keyword);
-  }
-
-
-  useEffect(() => {
-    // if a keyword has been set for a new search, retrieve articles with NewsApi
-    if(newKeyword !== '') {
-      setIsLoading(true);
-      localStorage.removeItem('search');
-      setNewsError(false);
-      newsApi.getCardsByKeyword(newKeyword)
-        .then((cards) => {
-          setIsLoading(false);
-          setCards(cards);
-          localStorage.setItem('search', newKeyword);
-          localStorage.setItem('searchCards', JSON.stringify(cards));
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          setNewsError(true);
-          console.log(err);
-        });
-    }
-  }, [newKeyword]);
-
-  useEffect(() => {
-    // if a new keyword has not been set and user is logged in, check for saved search date
-    if(newKeyword === '' && currentUserContext.isLoggedIn) {
-      const savedSearch = localStorage.getItem('search');
-      if(savedSearch) {
-        const searchCards = JSON.parse(localStorage.getItem('searchCards'));
-        if(searchCards && Array.isArray(searchCards)) {
-          setSavedKeyword(savedSearch);
-          setCards(searchCards);
-        }
-      }
-    }
-  }, [newKeyword, currentUserContext.isLoggedIn]);
 
 
   return (
     <>
-      <Header handleSearch={handleSearch} logout={logout} openLoginPopup={openLoginPopup} />
+      <Header handleSearch={setKeyword} logout={logout} openLoginPopup={openLoginPopup} />
       
-      {(newKeyword || savedKeyword || isLoading) ? 
+      {(keyword || currentUserContext.lastSearchKeyword || isLoading) ? 
         <NewsCardList 
-          cards={cards.slice(0, numberCardsShown)} 
-          totalCards={cards.length}
+          cards={Array.isArray(currentUserContext.cards) ? currentUserContext.cards.slice(0, numberCardsShown) : []} 
+          totalCards={Array.isArray(currentUserContext.cards) ? currentUserContext.cards.length : 0}
           isLoading={isLoading} 
           isSearch={true} 
           newsError={newsError}
           openLoginPopup={openLoginPopup} 
-          keyword={newKeyword || savedKeyword} 
+          keyword={keyword || currentUserContext.lastSearchKeyword} 
           showMoreCards={showMoreCards}
           deleteCard={deleteCard}
           updateSavedCards={updateSavedCards}

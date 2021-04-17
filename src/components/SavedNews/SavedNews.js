@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext'; 
 
@@ -8,10 +8,9 @@ import Footer from '../Footer/Footer';
 
 
 function SavedNews({ logout, openLoginPopup, deleteCard, updateSavedCards }) {
-
-  const currentUserContext = useContext(CurrentUserContext);
-  const [newsError, setNewsError] = useState(false);
   
+  const currentUserContext = useContext(CurrentUserContext);
+
 
   return (
     <>
@@ -20,11 +19,14 @@ function SavedNews({ logout, openLoginPopup, deleteCard, updateSavedCards }) {
         openLoginPopup={openLoginPopup}
       />
 
-      { currentUserContext.savedCards.length ? 
-        <NewsCardList cards={currentUserContext.savedCards} deleteCard={deleteCard} updateSavedCards={updateSavedCards} /> 
+      {currentUserContext.savedCards.length ? 
+        <NewsCardList 
+          cards={currentUserContext.savedCards} 
+          deleteCard={deleteCard} 
+          updateSavedCards={updateSavedCards}
+        /> 
         : 
-        null 
-      }
+        null}
 
       <Footer />
     </>

@@ -20,14 +20,16 @@ function NewsCardList({
   updateSavedCards,
   deleteCard
 }) {
-
+  
   return (
     <section className="news-cards">
-      {isLoading ? 
+      {isLoading 
+        ? 
         <Preloader /> 
         :
         <>
-          {cards.length === 0 ? 
+          {cards.length === 0 
+            ? 
             <NoNewsResults isError={newsError} />
             :
             <>
