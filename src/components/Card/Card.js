@@ -1,8 +1,8 @@
-import CardButtons from '../CardButtons/CardButtons';
-
+import './Card.css';
 import '../Link/Link.css';
 import '../Button/Button.css';
-import './Card.css';
+
+import CardButtons from '../CardButtons/CardButtons';
 
 
 function Card({ card, isSavedNews, openLoginPopup, updateSavedCards, deleteCard, keyword = '' }) {

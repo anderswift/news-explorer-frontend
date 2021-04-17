@@ -1,5 +1,4 @@
 function Keywords({ keywords }) {
-
   return (
     keywords.map((keyword, index) => (
       <li className="saved-news-intro__keyword-item" key={`${keyword.replace(/[^a-zA-Z ]/g, '')}-${index}`}>

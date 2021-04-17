@@ -2,8 +2,8 @@ import './MenuToggleButton.css';
 
 import menuIcon from '../../images/menu-icon.svg';
 
-function MenuToggleButton({ isMenuOpen, handleClick }) {
 
+function MenuToggleButton({ isMenuOpen, handleClick }) {
   return (
     <button className="menu-toggle" type="button" aria-label="Show/Hide Menu" onClick={handleClick}>
       <svg className="menu-toggle__icon">
@@ -11,7 +11,6 @@ function MenuToggleButton({ isMenuOpen, handleClick }) {
       </svg>
     </button>
   );
-  
 }
 
 export default MenuToggleButton;

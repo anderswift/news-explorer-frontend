@@ -72,7 +72,6 @@ function FormLogin({ isOpen, isSaving, onClose, onSubmit, openRegisterPopup, err
       
     </PopupWithForm>
   );
-  
 }
 
 export default FormLogin;

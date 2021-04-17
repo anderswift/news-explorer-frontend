@@ -22,3 +22,15 @@
   opacity: 1;
   right: calc(100% + 5px);
 }
+
+
+.card__button-icon_is-saved {
+  color: #2f71e5;
+  fill: #2f71e5;
+}
+
+.card__button:hover .card__button-icon_is-saved,
+.card__button:focus .card__button-icon_is-saved {
+  color: #347eff;
+  fill: #347eff;
+}

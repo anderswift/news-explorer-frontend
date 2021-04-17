@@ -4,10 +4,10 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 import Keywords from '../Keywords/Keywords';
 
-import '../PageSection/PageSection.css';
 import '../List/List.css';
 import '../Button/Button.css';
 import '../Link/Link.css';
+import '../PageSection/PageSection.css';
 import './SavedNewsIntro.css';
 
 
@@ -47,7 +47,7 @@ function SavedNewsIntro() {
               </li>
               : 
               null}
-              
+
           </ul>
         </div>
 

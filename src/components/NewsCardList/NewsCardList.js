@@ -1,11 +1,11 @@
+import '../List/List.css';
+import './NewsCardList.css';
+import '../PageSection/PageSection.css';
+
 import Preloader from '../Preloader/Preloader';
 import NoNewsResults from '../NoNewsResults/NoNewsResults';
 import Card from '../Card/Card';
 import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
-
-import '../PageSection/PageSection.css';
-import '../List/List.css';
-import './NewsCardList.css';
 
 
 function NewsCardList({ 
@@ -55,7 +55,6 @@ function NewsCardList({
 
           }
         </>
-
       }    
     </section>
   );

@@ -1,7 +1,7 @@
 import './Preloader.css';
 
-function Preloader() {
 
+function Preloader() {
   return (
     <p className="loader">Searching for news...</p>
   );

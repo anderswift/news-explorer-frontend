@@ -1,11 +1,11 @@
-import CardButtonSave from '../CardButtonSave/CardButtonSave';
-import CardButtonDelete from '../CardButtonDelete/CardButtonDelete';
-
 import '../Button/Button.css';
 import './CardButtons.css';
 
-function CardButtons({ isSavedNews, openLoginPopup, updateSavedCards, deleteCard, card, keyword }) {
+import CardButtonSave from '../CardButtonSave/CardButtonSave';
+import CardButtonDelete from '../CardButtonDelete/CardButtonDelete';
 
+
+function CardButtons({ isSavedNews, openLoginPopup, updateSavedCards, deleteCard, card, keyword }) {
 
   return (
     <>

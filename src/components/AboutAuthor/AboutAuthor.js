@@ -1,6 +1,8 @@
 import '../PageSection/PageSection.css';
 import './AboutAuthor.css';
+
 import authorPhoto from '../../images/author.png';
+
 
 function AboutAuthor() {
   return (

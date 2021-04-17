@@ -1,12 +1,12 @@
 import { NavLink } from 'react-router-dom';
 
-import githubIcon from '../../images/github.svg';
-import facebookIcon from '../../images/facebook.svg';
-
 import '../PageSection/PageSection.css';
 import '../Link/Link.css';
 import '../List/List.css';
 import './Footer.css';
+
+import githubIcon from '../../images/github.svg';
+import facebookIcon from '../../images/facebook.svg';
 
 function Footer() {
   return (

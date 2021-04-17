@@ -3,8 +3,11 @@ import { Route, Redirect } from 'react-router-dom';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext'; 
 
-const ProtectedRoute = ({ component: Component, tokenChecked, ...props  }) => {
+
+function ProtectedRoute({ component: Component, tokenChecked, ...props  }) {
+
   const currentUserContext = useContext(CurrentUserContext);
+
 
   return (
     <Route>
@@ -14,6 +17,7 @@ const ProtectedRoute = ({ component: Component, tokenChecked, ...props  }) => {
           : <Redirect to={{ pathname: './', signin: true }} />
       }
     </Route>
-)}
+  );
+}
 
 export default ProtectedRoute; 

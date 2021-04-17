@@ -1,8 +1,7 @@
-import Navigation from '../Navigation/Navigation';
-import SearchForm from '../SearchForm/SearchForm';
-
 import './Header.css';
 
+import Navigation from '../Navigation/Navigation';
+import SearchForm from '../SearchForm/SearchForm';
 
 
 function Header({ handleSearch, logout, openLoginPopup }) {

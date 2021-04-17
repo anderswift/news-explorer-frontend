@@ -10,6 +10,7 @@ function PopupWithForm({ isOpen, onClose, onSubmit, onReset, name, heading, chil
 
   const formRef = useRef();
 
+  
   useEffect(() => {
     if(!isOpen) formRef.current.reset();
   }, [isOpen]);

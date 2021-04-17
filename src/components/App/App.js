@@ -7,13 +7,13 @@ import newsApi from '../../utils/NewsApi.js';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
+import './App.css';
+
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import FormRegister from '../FormRegister/FormRegister';
 import FormLogin from '../FormLogin/FormLogin';
 import Popup from '../Popup/Popup';
-
-import './App.css';
 
 
 function App() {

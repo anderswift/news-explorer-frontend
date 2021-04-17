@@ -1,15 +1,19 @@
 import { useRef } from "react";
 
-import closeIcon from '../../images/menu-icon.svg';
 import './Popup.css';
+
+import closeIcon from '../../images/menu-icon.svg';
+
 
 function Popup({ isOpen, onClose, children }) {
 
   const modalRef = useRef();
 
+
   const closeOnClickAway = (e) => { 
     if (!modalRef.current.contains(e.target)) onClose();
   }
+
 
   return (
     <div className={`popup ${isOpen ? 'popup_open' : ''}`} onClick={closeOnClickAway} >
@@ -25,7 +29,6 @@ function Popup({ isOpen, onClose, children }) {
       </div>
     </div>
   );
-  
 }
 
 export default Popup;

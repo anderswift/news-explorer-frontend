@@ -1,6 +1,5 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 
-import newsApi from '../../utils/NewsApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext'; 
 
 import Header from '../Header/Header';
@@ -29,7 +28,8 @@ function Main({
     <>
       <Header handleSearch={setKeyword} logout={logout} openLoginPopup={openLoginPopup} />
       
-      {(keyword || currentUserContext.lastSearchKeyword || isLoading) ? 
+      {(keyword || currentUserContext.lastSearchKeyword || isLoading) 
+        ? 
         <NewsCardList 
           cards={Array.isArray(currentUserContext.cards) ? currentUserContext.cards.slice(0, numberCardsShown) : []} 
           totalCards={Array.isArray(currentUserContext.cards) ? currentUserContext.cards.length : 0}
