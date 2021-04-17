@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useRef } from 'react';
 
 import '../Input/Input.css';
 import '../Button/Button.css';
@@ -8,17 +8,24 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 
 function SearchForm({ handleSearch, keyword }) {
+
+  const searchFieldRed = useRef(); // for focus only
   
   const currentUserContext = useContext(CurrentUserContext);
-  const [searchTerm, setSearchTerm] = useState();
-
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTermInvalid, setSearchTermInvalid] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleSearch(searchTerm);
+    if(searchTerm) handleSearch(searchTerm);
+    else {
+      setSearchTermInvalid(true);
+      searchFieldRed.current.focus();
+    }
   }
 
   function handleChange(e) {
+    setSearchTermInvalid(false);
     setSearchTerm(e.target.value);
   }
 
@@ -31,9 +38,10 @@ function SearchForm({ handleSearch, keyword }) {
       
       <fieldset className="search__bar">
         <input
-          className="input search__field"
+          ref={searchFieldRed}
+          className={`input search__field${searchTermInvalid ? ' input_has-error search__field_has-error' : ''}`}
           type="text"
-          placeholder="Enter topic"
+          placeholder={searchTermInvalid ? 'You must enter a topic' : 'Enter topic'}
           onChange={handleChange}
           value={searchTerm !== undefined ? searchTerm : currentUserContext.lastSearchKeyword}
         />
