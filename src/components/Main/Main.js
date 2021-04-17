@@ -14,7 +14,7 @@ function Main({
   deleteCard,
   updateSavedCards,
   keyword,
-  setKeyword,
+  searchForNews,
   isLoading,
   newsError,
   numberCardsShown,
@@ -26,7 +26,7 @@ function Main({
 
   return (
     <>
-      <Header handleSearch={setKeyword} logout={logout} openLoginPopup={openLoginPopup} />
+      <Header handleSearch={searchForNews} logout={logout} openLoginPopup={openLoginPopup} />
       
       {(keyword || currentUserContext.lastSearchKeyword || isLoading) 
         ? 

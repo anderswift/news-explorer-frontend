@@ -107,6 +107,31 @@ function App() {
 
   const closeOnEsc = (e) => { if(e.key === 'Escape') closePopups(); }
 
+  const searchForNews = (searchTerm) => {
+    if (searchTerm !== '') {
+      setKeyword(searchTerm);
+      setIsLoading(true);
+      setLoadingError(false);
+      resetCardsShown();
+      localStorage.removeItem('search');
+      localStorage.removeItem('searchCards');
+      
+      newsApi.getCardsByKeyword(searchTerm)
+      .then((newCards) => {
+        setIsLoading(false);
+        setLastSearchKeyword(searchTerm);
+        setCards(newCards); 
+        localStorage.setItem('search', searchTerm);
+        localStorage.setItem('searchCards', JSON.stringify(newCards));
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setLoadingError(true);
+        console.log(err);
+      });
+    }
+  }
+
   const updateSavedCards = (newCard) => { setSavedCards([newCard, ...savedCards]); }
 
   const deleteCard = (cardId) => {
@@ -138,32 +163,6 @@ function App() {
       });
     } else setTokenChecked(true);
   }, []);
-
-  
-  useEffect(() => {
-    // if the keyword has been updated, initiate a new search
-    if (keyword !== '') {
-      setIsLoading(true);
-      setLoadingError(false);
-      resetCardsShown();
-      localStorage.removeItem('search');
-      localStorage.removeItem('searchCards');
-      
-      newsApi.getCardsByKeyword(keyword)
-      .then((newCards) => {
-        setIsLoading(false);
-        setLastSearchKeyword(keyword);
-        setCards(newCards); 
-        localStorage.setItem('search', keyword);
-        localStorage.setItem('searchCards', JSON.stringify(newCards));
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        setLoadingError(true);
-        console.log(err);
-      });
-    }
-  }, [keyword]);
 
 
   // if no new keyword set but user is logged in/remembered, retrieve saved data from last search
@@ -250,7 +249,7 @@ function App() {
               deleteCard={deleteCard}
               updateSavedCards={updateSavedCards}
               keyword={keyword}
-              setKeyword={setKeyword}
+              searchForNews={searchForNews}
               numberCardsShown={numberCardsShown}
               showMoreCards={showMoreCards}
               isLoading={isLoading}

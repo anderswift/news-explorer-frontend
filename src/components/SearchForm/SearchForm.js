@@ -1,20 +1,21 @@
-import { useState, useContext, useRef } from 'react';
-
-import CurrentUserContext from '../../contexts/CurrentUserContext'; 
+import { useState, useContext, useRef, useEffect } from 'react';
 
 import '../Input/Input.css';
 import '../Button/Button.css';
 import './SearchForm.css';
 
+import CurrentUserContext from '../../contexts/CurrentUserContext'; 
+
 
 function SearchForm({ handleSearch, keyword }) {
 
   const searchFieldRef = useRef(); // for focus only
+  const searchFormRef = useRef(); // for focus only
+  
   const currentUserContext = useContext(CurrentUserContext);
-
   const [searchTerm, setSearchTerm] = useState('');
   const [searchTermInvalid, setSearchTermInvalid] = useState(false);
-
+  const [checkedSavedSearch, setCheckedSavedSearch] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -31,8 +32,21 @@ function SearchForm({ handleSearch, keyword }) {
   }
 
 
+  useEffect(() => {
+    console.log('in it',!checkedSavedSearch,currentUserContext.isLoggedIn,currentUserContext.lastSearchKeyword);
+    if(!checkedSavedSearch && currentUserContext.isLoggedIn && currentUserContext.lastSearchKeyword) {
+      console.log(currentUserContext.lastSearchKeyword);
+      setSearchTerm(currentUserContext.lastSearchKeyword);
+      setCheckedSavedSearch(true);
+    } else if (checkedSavedSearch && !currentUserContext.isLoggedIn) {
+      setCheckedSavedSearch(false);
+      setSearchTerm('');
+    }
+  }, [checkedSavedSearch, currentUserContext.isLoggedIn, currentUserContext.lastSearchKeyword]);
+
+
   return (
-    <form className="search" onSubmit={handleSubmit}>
+    <form className="search" onSubmit={handleSubmit} ref={searchFormRef}>
 
       <h2 className="search__heading">What's going on in the world?</h2>
       <p className="search__desc">Find the latest news on any topic and save articles in your personal account.</p>
@@ -44,7 +58,7 @@ function SearchForm({ handleSearch, keyword }) {
           type="text"
           placeholder={searchTermInvalid ? 'You must enter a topic' : 'Enter topic'}
           onChange={handleChange}
-          value={searchTerm ? searchTerm : currentUserContext.lastSearchKeyword}
+          value={searchTerm}
         />
         <button className="search__button button button_type_submit" type="submit">
           Search
