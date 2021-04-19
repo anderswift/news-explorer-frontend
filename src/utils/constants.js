@@ -1,7 +1,7 @@
 require('dotenv').config({ debug: process.env.DEBUG });
 
 module.exports = {
-  ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT || 'development', 
+  ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT || 'production', 
   NEWS_API_KEY: process.env.REACT_APP_NEWS_API_KEY,
   RESPONSE_MSG: {
     serverError: 'An error occurred on the server.',

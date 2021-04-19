@@ -100,7 +100,6 @@ class MainApi {
 const apiUrl = (ENVIRONMENT === 'production') 
   ? 'https://api.newsexplorer.anderswift.com/' 
   : 'http://localhost:3000/';
-console.log(apiUrl);
 
 const api = new MainApi({
   baseUrl: apiUrl,
