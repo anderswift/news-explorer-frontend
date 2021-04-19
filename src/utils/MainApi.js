@@ -1,4 +1,4 @@
-import { RESPONSE_MSG } from './constants.js';
+import { ENVIRONMENT, RESPONSE_MSG } from './constants.js';
 
 class MainApi {
 
@@ -42,7 +42,6 @@ class MainApi {
     });  
   }
   
-  
   register(credentials) {
     return fetch(this._baseUrl + 'signup', {
       method: "POST",
@@ -57,10 +56,53 @@ class MainApi {
       return Promise.reject(RESPONSE_MSG.connectionFailed);
     }); 
   }
+
+  getSavedNews() {
+    return fetch(this._baseUrl + 'articles', {
+      method: "GET",
+      headers: this._headers
+    })
+    .then(res => {
+      if (res.ok) return res.json();
+      if (res.status) return Promise.reject(RESPONSE_MSG.serverError);
+      return Promise.reject(RESPONSE_MSG.connectionFailed);
+    }); 
+  }
+
+  saveNewsCard(cardData) {
+    return fetch(this._baseUrl + 'articles', {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify(cardData)
+    })
+    .then(res => {
+      if (res.ok) return res.json();
+      if (res.status) return Promise.reject(RESPONSE_MSG.serverError);
+      return Promise.reject(RESPONSE_MSG.connectionFailed);
+    }); 
+  }
+
+  deleteNewsCard(cardId) {
+    return fetch(this._baseUrl + 'articles/' + cardId, {
+      method: "DELETE",
+      headers: this._headers
+    })
+    .then(res => {
+      if (res.ok) return res.json();
+      if (res.status) return Promise.reject(RESPONSE_MSG.serverError);
+      return Promise.reject(RESPONSE_MSG.connectionFailed);
+    }); 
+  }
+
 }
 
+
+const apiUrl = (ENVIRONMENT === 'production') 
+  ? 'https://api.newsexplorer.anderswift.com/' 
+  : 'http://localhost:3000/';
+
 const api = new MainApi({
-  baseUrl: "http://localhost:3001/",
+  baseUrl: apiUrl,
   headers: { "Content-Type": "application/json" }
 });
 

@@ -71,7 +71,6 @@ function FormRegister({ isOpen, isSaving, onClose, onSubmit, openLoginPopup, err
       
     </PopupWithForm>
   );
-  
 }
 
 export default FormRegister;

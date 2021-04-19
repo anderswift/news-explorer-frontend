@@ -3,20 +3,26 @@ import { NavLink } from 'react-router-dom';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-import SignInOutButton from '../SignInOutButton/SignInOutButton';
-
 import '../Link/Link.css';
 import '../List/List.css';
 import './Menu.css';
+
+import SignInOutButton from '../SignInOutButton/SignInOutButton';
+
 
 function Menu({ isSavedNewsHeader = false, isMenuOpen = true, logout, openLoginPopup }) {
 
   const currentUserContext = useContext(CurrentUserContext);
 
+
   return (
     <ul className={`list menu${isMenuOpen ? ' menu_open' : ''}${isSavedNewsHeader ? ' menu_scheme_light' : ''}`}>
+      
       <li>
-        <NavLink to="/" exact={true} className={`menu__link${isSavedNewsHeader ? ' menu__link_scheme_light' : ''} link`} activeClassName="menu__link_current">Home</NavLink>
+        <NavLink to="/" exact={true} className={`menu__link${isSavedNewsHeader ? ' menu__link_scheme_light' : ''} link`} 
+          activeClassName="menu__link_current">
+          Home
+        </NavLink>
       </li>
 
       {currentUserContext.isLoggedIn &&

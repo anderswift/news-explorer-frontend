@@ -38,6 +38,8 @@
 
 .search__field::placeholder { color: #b6bcbf; }
 
+.search__field_has-error::placeholder { color: #e73600; }
+
 
 @media only screen and (min-width: 768px) {
 

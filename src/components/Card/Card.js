@@ -1,14 +1,18 @@
-import CardButton from '../CardButton/CardButton';
-
+import './Card.css';
 import '../Link/Link.css';
 import '../Button/Button.css';
-import './Card.css';
 
-function Card({ card, isSavedNews, openLoginPopup }) {
+import CardButtons from '../CardButtons/CardButtons';
+
+
+function Card({ card, isSavedNews, openLoginPopup, updateSavedCards, deleteCard, keyword = '' }) {
+
   const date = new Date(card.publishedAt);
   const formattedDate = `${date.toLocaleString('en-us', { month: 'long' })} ${date.getDate()}, ${date.getFullYear()}`;
 
-  function truncate(text, limit) {
+
+  const truncate = (text, limit)=> {
+    if (!text) return '';
     if (text.length < limit) return text;
 
     const punctuation = ['.', ',', '?', '!'];
@@ -18,6 +22,7 @@ function Card({ card, isSavedNews, openLoginPopup }) {
     if (!punctuation.includes(truncated[truncated.length - 1])) return `${truncated}...`;
     return `${truncated.substring(0, truncated.length - 1)}...`;
   }
+
 
   return (
     
@@ -31,19 +36,18 @@ function Card({ card, isSavedNews, openLoginPopup }) {
             <h3 className="card__title">{truncate(card.title, 60)}</h3>
           </header>
           <p className="card__description">{truncate(card.description, 180)}</p>
-          <footer className="card__source">{card.source.name}</footer>
+          <footer className="card__source">{card.source.name || card.source}</footer>
         </article>
       </a>
-      {isSavedNews
-        ? (
-          <>
-            <button type="button" className="card__button_keyword card__button button" aria-label={`Filter by keyword: ${card.keyword}`}>
-              {card.keyword}
-            </button>
-            <CardButton icon="delete" />
-          </>
-        )
-        : <CardButton icon="save" openLoginPopup={openLoginPopup} />}
+
+      <CardButtons 
+        card={card} 
+        keyword={keyword}
+        isSavedNews={isSavedNews} 
+        openLoginPopup={openLoginPopup} 
+        updateSavedCards={updateSavedCards} 
+        deleteCard={deleteCard} 
+      />
     </li>
     
   );

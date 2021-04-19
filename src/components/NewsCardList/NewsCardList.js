@@ -1,21 +1,35 @@
+import '../List/List.css';
+import './NewsCardList.css';
+import '../PageSection/PageSection.css';
+
 import Preloader from '../Preloader/Preloader';
 import NoNewsResults from '../NoNewsResults/NoNewsResults';
 import Card from '../Card/Card';
 import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
 
-import '../PageSection/PageSection.css';
-import '../List/List.css';
-import './NewsCardList.css';
 
-function NewsCardList({ cards, totalCards, isLoading, isSearch, openLoginPopup, showMoreCards, newsError }) {
-
+function NewsCardList({ 
+  cards, 
+  totalCards, 
+  isLoading, 
+  isSearch, 
+  keyword, 
+  openLoginPopup, 
+  showMoreCards, 
+  newsError, 
+  updateSavedCards,
+  deleteCard
+}) {
+  
   return (
     <section className="news-cards">
-      {isLoading ? 
+      {isLoading 
+        ? 
         <Preloader /> 
         :
         <>
-          {cards.length === 0 ? 
+          {cards.length === 0 
+            ? 
             <NoNewsResults isError={newsError} />
             :
             <>
@@ -23,8 +37,16 @@ function NewsCardList({ cards, totalCards, isLoading, isSearch, openLoginPopup, 
 
               <ul className="news-cards__list list page-section">
 
-                {cards.map((card, index) => (
-                  <Card card={card} key={index} isSavedNews={!isSearch} openLoginPopup={openLoginPopup} />
+                {cards.map((card) => (
+                  <Card 
+                    card={card} 
+                    key={card._id || card.url} 
+                    isSavedNews={!isSearch} 
+                    keyword={keyword} 
+                    openLoginPopup={openLoginPopup} 
+                    updateSavedCards={updateSavedCards}
+                    deleteCard={deleteCard}
+                  />
                 ))}
 
               </ul>
@@ -33,7 +55,6 @@ function NewsCardList({ cards, totalCards, isLoading, isSearch, openLoginPopup, 
 
           }
         </>
-
       }    
     </section>
   );

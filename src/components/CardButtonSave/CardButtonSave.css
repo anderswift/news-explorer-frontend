@@ -1,0 +1,36 @@
+.card__button_logged-out:before {
+  content: 'Sign in to save articles';
+  display: block;
+  background: #fff;
+  border-radius: 8px;
+  position: absolute;
+  right: calc(100% + 20px);
+  top: 0;
+  width: 26ch;
+  height: 40px;
+  font-size: 12px;
+  line-height: 40px;
+  font-weight: 500;
+  padding: 0;
+  text-align: center;
+  opacity: 0;
+  transition: 0.35s all 0.1s ease-in-out;
+}
+
+.card__button_logged-out:hover:before,
+.card__button_logged-out:focus:before {
+  opacity: 1;
+  right: calc(100% + 5px);
+}
+
+
+.card__button-icon_is-saved {
+  color: #2f71e5;
+  fill: #2f71e5;
+}
+
+.card__button:hover .card__button-icon_is-saved,
+.card__button:focus .card__button-icon_is-saved {
+  color: #347eff;
+  fill: #347eff;
+}

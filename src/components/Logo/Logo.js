@@ -3,10 +3,12 @@ import { NavLink, useLocation } from 'react-router-dom';
 import '../Link/Link.css';
 import './Logo.css';
 
+
 function Logo(props) {
 
   const location = useLocation();
 
+  
   return (
     <>
     { location.pathname === '/' ? 
@@ -23,7 +25,6 @@ function Logo(props) {
       </h6>
     }
     </>
-    
   );
 }
 

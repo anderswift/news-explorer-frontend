@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 
 import './FormField.css';
 
+
 function FormField({ name, label, description, type, minMax, value, error, handleChange, focusOnOpen = false }) {
 
   const fieldRef = useRef(); // for focus only

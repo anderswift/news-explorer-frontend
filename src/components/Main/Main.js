@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 
-import newsApi from '../../utils/NewsApi';
+import CurrentUserContext from '../../contexts/CurrentUserContext'; 
 
 import Header from '../Header/Header';
 import NewsCardList from '../NewsCardList/NewsCardList';
@@ -8,59 +8,40 @@ import AboutAuthor from '../AboutAuthor/AboutAuthor';
 import Footer from '../Footer/Footer';
 
 
-function Main({ logout, openLoginPopup }) {
+function Main({ 
+  logout,
+  openLoginPopup,
+  deleteCard,
+  updateSavedCards,
+  keyword,
+  searchForNews,
+  isLoading,
+  newsError,
+  numberCardsShown,
+  showMoreCards
+}) {
 
-  const defaultNumberCardsShown = 3;
-  const [keyword, setKeyword] = useState('');
-  const [cards, setCards] = useState([]);
-  const [numberCardsShown, setNumberCardsShown] = useState(defaultNumberCardsShown);
-  const [isLoading, setIsLoading] = useState(false);
-  const [newsError, setNewsError] = useState(false);
-
-
-  function searchByKeyword(keyword) {
-    setKeyword(keyword);
-  }
-
-  function showMoreCards() {
-    setNumberCardsShown(numberCardsShown + defaultNumberCardsShown);
-  }
-
-
-  useEffect(() => {
-    if(keyword !== '') {
-      setIsLoading(true);
-      setNewsError(false);
-      setNumberCardsShown(defaultNumberCardsShown);
-      newsApi.getCardsByKeyword(keyword)
-        .then((cards) => {
-          setIsLoading(false);
-          setCards(cards);
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          setNewsError(true);
-          console.log(err);
-        });
-    }
-  }, [keyword]);
+  const currentUserContext = useContext(CurrentUserContext);
 
 
   return (
     <>
-      <Header handleSearch={searchByKeyword} logout={logout} openLoginPopup={openLoginPopup} />
+      <Header handleSearch={searchForNews} logout={logout} openLoginPopup={openLoginPopup} />
       
-      {(keyword || isLoading) ? 
+      {(keyword || currentUserContext.lastSearchKeyword || isLoading) 
+        ? 
         <NewsCardList 
-          cards={cards.slice(0, numberCardsShown)} 
-          totalCards={cards.length}
+          cards={Array.isArray(currentUserContext.cards) ? currentUserContext.cards.slice(0, numberCardsShown) : []} 
+          totalCards={Array.isArray(currentUserContext.cards) ? currentUserContext.cards.length : 0}
           isLoading={isLoading} 
           isSearch={true} 
           newsError={newsError}
           openLoginPopup={openLoginPopup} 
-          keyword={keyword} 
+          keyword={keyword || currentUserContext.lastSearchKeyword} 
           showMoreCards={showMoreCards}
-          />
+          deleteCard={deleteCard}
+          updateSavedCards={updateSavedCards}
+        />
         : 
         null
       }
