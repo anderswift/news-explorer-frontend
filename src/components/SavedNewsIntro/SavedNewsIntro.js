@@ -15,6 +15,7 @@ function SavedNewsIntro() {
 
   const currentUserContext = useContext(CurrentUserContext);
   const [showAllKeywords, setShowAllKeywords] = useState(false);
+  const defaultNumberKeywordLinksShown = 3;
 
 
   return (
@@ -32,17 +33,17 @@ function SavedNewsIntro() {
           By keywords:&nbsp;
           <ul className="saved-news-intro__keyword-list list">
 
-            <Keywords keywords={!showAllKeywords && currentUserContext.savedCardKeywords.length > 3 
-              ? currentUserContext.savedCardKeywords.slice(0,2)
+            <Keywords keywords={!showAllKeywords && currentUserContext.savedCardKeywords.length > defaultNumberKeywordLinksShown 
+              ? currentUserContext.savedCardKeywords.slice(0, defaultNumberKeywordLinksShown - 1)
               : currentUserContext.savedCardKeywords} 
             />
           
-            {!showAllKeywords && currentUserContext.savedCardKeywords.length > 3 
+            {!showAllKeywords && currentUserContext.savedCardKeywords.length > defaultNumberKeywordLinksShown 
               ? 
               <li className="saved-news-intro__keyword-item">
                 <button className="button button_link link saved-news-intro__keyword-button saved-news-intro__keyword-button_more" 
-                  type="button" onClick={() => setShowAllKeywords(true)} aria-label={`show ${currentUserContext.savedCardKeywords.length - 2} more keywords`}>
-                    and {currentUserContext.savedCardKeywords.length - 2} more
+                  type="button" onClick={() => setShowAllKeywords(true)} aria-label={`show ${currentUserContext.savedCardKeywords.length - defaultNumberKeywordLinksShown + 1} more keywords`}>
+                    and {currentUserContext.savedCardKeywords.length - defaultNumberKeywordLinksShown + 1} more
                 </button>
               </li>
               : 

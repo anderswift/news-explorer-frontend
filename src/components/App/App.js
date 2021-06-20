@@ -202,8 +202,8 @@ function App() {
 
     // update sorted list of keywords for saved cards
     if(Array.isArray(savedCards)) {
-      let keywordList = savedCards.map(card => card.keyword.toLowerCase());
-      let keywordFrequency = [];
+      const keywordList = savedCards.map(card => card.keyword.toLowerCase());
+      const keywordFrequency = [];
       keywordList.forEach((keyword) => { 
         keywordFrequency[keyword] === undefined 
         ? keywordFrequency[keyword] = 1

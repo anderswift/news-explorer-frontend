@@ -33,9 +33,7 @@ function SearchForm({ handleSearch, keyword }) {
 
 
   useEffect(() => {
-    console.log('in it',!checkedSavedSearch,currentUserContext.isLoggedIn,currentUserContext.lastSearchKeyword);
     if(!checkedSavedSearch && currentUserContext.isLoggedIn && currentUserContext.lastSearchKeyword) {
-      console.log(currentUserContext.lastSearchKeyword);
       setSearchTerm(currentUserContext.lastSearchKeyword);
       setCheckedSavedSearch(true);
     } else if (checkedSavedSearch && !currentUserContext.isLoggedIn) {

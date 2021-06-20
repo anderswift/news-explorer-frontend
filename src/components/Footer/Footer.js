@@ -49,7 +49,7 @@ function Footer() {
       
 
       <p className="footer__copyright">
-        © 2021 Supersite, Powered by News API
+        © 2021 Ander Swift, Powered by News API
       </p>
 
     </footer>
